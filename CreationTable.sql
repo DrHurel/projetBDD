@@ -108,8 +108,8 @@ CREATE TABLE Historique_Vente_Vaisseau(
     id_entreprise INT,
     id_proprietaire INT,
     date_vente DATE,
-    CONSTRAINT FK_Entreprise_Vaisseau_ID_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau)
-    CONSTRAINT FK_Proprietaire_id_proprietaire FOREIGN KEY(id_proprietaire) REFERENCES Proprietaire(id_proprietaire)
-    CONSTRAINT FK_Entreprise_Vaisseau_ID_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise_Vaisseau(id_entreprise)
+    CONSTRAINT FK_Entreprise_Vaisseau_ID_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau),
+    CONSTRAINT FK_Proprietaire_id_proprietaire FOREIGN KEY(id_proprietaire) REFERENCES Proprietaire(id_proprietaire),
+    CONSTRAINT FK_Entreprise_Vaisseau_ID_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise_Vaisseau(id_entreprise),
     CONSTRAINT PK_Historique_Vente_Vaisseau PRIMARY KEY(id_vaisseau,id_entreprise,id_proprietaire)
 );
