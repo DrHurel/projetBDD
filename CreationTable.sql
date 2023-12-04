@@ -5,6 +5,7 @@ CREATE TABLE Equipage (
     id_equipage INT,
     nom VARCHAR(50),
     date_creation DATE,
+    id_entreprise INT,
     CONSTRAINT PK_Equipe_id_entreprise PRIMARY KEY(id_equipage),
     CONSTRAINT FK_Entreprise_Vaisseau_ID_vaisseau FOREIGN KEY(id_entreprise) REFERENCES Entreprise_Vaisseau(id_entreprise) ge PRIMARY KEY(id_equipage)
 );
