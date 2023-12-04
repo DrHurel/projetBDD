@@ -1,5 +1,9 @@
 
-
+CREATE TABLE Proprietaire (
+    id_proprietaire INT,
+    CONSTRAINT PK_Proprietaire_id_proprietaire PRIMARY KEY(id_proprietaire)
+);
+    
 -- a verif
 CREATE TABLE Equipage (
     id_equipage INT,
@@ -100,7 +104,11 @@ CREATE TABLE Historique_Proprio(
     date_debut DATE,
     date_fin DATE,
 
-    CONSTRAINT PK_Historique_Proprio PRIMARY KEY(date_debut,date_fin,id_proprietaire,id_vaisseau)
+    CONSTRAINT PK_Historique_Proprio PRIMARY KEY(date_debut,date_fin,id_proprietaire,id_vaisseau),
+    CONSTRAINT FK__Historique_Proprio_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau),
+    CONSTRAINT FK__Historique_Proprio_id_proprietaire FOREIGN KEY(id_proprietaire) REFERENCES Proprietaire(id_proprietaire)
+    
+    
 );
 
 CREATE TABLE Historique_Vente_Vaisseau(
