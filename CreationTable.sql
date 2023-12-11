@@ -7,15 +7,16 @@ CREATE TABLE Modele_Objet(
     id_objet INT,
     nom VARCHAR(64) NOT NULL,
     statut VARCHAR(7) NOT NULL,
-    prix INT,
+    prix INT NOT NULL,
+    masse INT NOT NOT,
     CONSTRAINT TYPE_OBJET CHECK (statut IN ('LEGAL','ILLEGAL')),
     CONSTRAINT PK_Modele_Objet_id_objet PRIMARY KEY(id_objet)
 );
 
 CREATE TABLE Entreprise(
     id_entreprise INT,
-    nom_entreprise VARCHAR(50),
-    data_creation DATE,
+    nom_entreprise VARCHAR(50) NOT NULL,
+    data_creation DATE NOT NULL,
     CONSTRAINT FK_Entreprise_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Proprietaire(id_proprietaire),
     CONSTRAINT PK_Entreprise PRIMARY KEY(id_entreprise)
 ); 
@@ -34,11 +35,11 @@ CREATE TABLE Entreprise_Objet(
 
 CREATE TABLE Vaisseau(
     id_vaisseau INT,
-    prix INT,
-    poids INT,
-    longueur INT,
-    largeur INT,
-    id_fabriquant INT,
+    prix INT NOT NULL,
+    poids INT NOT NULL,
+    longueur INT NOT NULL,
+    largeur INT NOT NULL,
+    id_fabriquant INT NOT NULL,
     CONSTRAINT PK_Vaisseau PRIMARY KEY(id_vaisseau),
     CONSTRAINT FK_Vaisseau_id_fabriquant FOREIGN KEY(id_fabriquant) REFERENCES Entreprise_Vaisseau(id_entreprise)
 );
@@ -46,20 +47,20 @@ CREATE TABLE Vaisseau(
 
 CREATE TABLE Equipage (
     id_equipage INT,
-    nom VARCHAR(50),
-    date_creation DATE,
-    id_vaisseau INT,
+    nom VARCHAR(50) NOT NULL,
+    date_creation DATE NOT NULL,
+    id_vaisseau INT NOT NULL,
     CONSTRAINT PK_Equipe_id_equipage PRIMARY KEY(id_equipage),
     CONSTRAINT FK_Equipage_id_entreprise FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau) 
 );
 
 CREATE TABLE Personne(
     id_personne INT,
-    nom VARCHAR(50),
-    prenom VARCHAR(50),
-    poste VARCHAR(15),
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    poste VARCHAR(15) NOT NULL,
     age INT,
-    date_naissance DATE,
+    date_naissance DATE NOT NULL,
     id_entreprise INT,
     id_equipage INT,
     CONSTRAINT FK_Personne_id_proprietaire FOREIGN KEY(id_personne) REFERENCES Proprietaire(id_proprietaire),
@@ -70,10 +71,10 @@ CREATE TABLE Personne(
     
 
 CREATE TABLE Chef_Entreprise(
-    date_debut DATE,
+    date_debut DATE NOT NULL,
     date_fin DATE,
-    id_entreprise INT,
-    id_personne INT,
+    id_entreprise INT NOT NULL,
+    id_personne INT NOT NULL,
     CONSTRAINT FK_Chef_Entreprise_id_personne FOREIGN KEY (id_personne) REFERENCES Personne(id_personne),
     CONSTRAINT FK_Chef_Entreprise_ID_Entreprise FOREIGN KEY (id_entreprise) REFERENCES Entreprise(id_entreprise),
     CONSTRAINT PK_Chef_Entreprise PRIMARY KEY(id_entreprise,id_personne,date_debut)   
@@ -91,6 +92,7 @@ CREATE TABLE Inventaire_Vaisseau(
     id_vaisseau INT,
     id_objet INT,
     quantite INT,
+    CHECK quantite > 0,
     CONSTRAINT FK_Inventaire_Vaisseau_id_objet FOREIGN KEY(id_objet) REFERENCES Modele_Objet(id_objet),
     CONSTRAINT FK_Inventaire_Vaisseau_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau),
     CONSTRAINT PK_Inventaire_Vaisseau PRIMARY KEY(id_objet,id_vaisseau)   
