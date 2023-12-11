@@ -19,7 +19,7 @@ CREATE TABLE Entreprise(
     nom_entreprise VARCHAR(50),
     data_creation DATE,
     CONSTRAINT FK_Entreprise_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Proprietaire(id_proprietaire),
-    CONSTRAINT PK_Entreprise PRIMARY KEY(id_entreprise),
+    CONSTRAINT PK_Entreprise PRIMARY KEY(id_entreprise)
     
 ); 
 
