@@ -5,8 +5,8 @@ CREATE TABLE Proprietaire (
 
 CREATE TABLE Modele_Objet(
     id_objet INT,
-    nom VARCHAR(64),
-    statut VARCHAR(7),
+    nom VARCHAR(64) NOT NULL,
+    statut VARCHAR(7) NOT NULL,
     prix INT,
     CONSTRAINT TYPE_OBJET CHECK (statut IN ('LEGAL','ILLEGAL')),
     CONSTRAINT PK_Modele_Objet_id_objet PRIMARY KEY(id_objet)
@@ -36,9 +36,9 @@ CREATE TABLE Equipage (
     id_equipage INT,
     nom VARCHAR(50),
     date_creation DATE,
-    id_entreprise INT,
+    id_vaisseau INT,
     CONSTRAINT PK_Equipe_id_equipage PRIMARY KEY(id_equipage),
-    CONSTRAINT FK_Equipage_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise_Vaisseau(id_entreprise) 
+    CONSTRAINT FK_Equipage_id_entreprise FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau) 
 );
 
 CREATE TABLE Personne(
