@@ -32,6 +32,18 @@ CREATE TABLE Entreprise_Objet(
     CONSTRAINT PK_Entreprise_Objet PRIMARY KEY(id_entreprise)
 );
 
+CREATE TABLE Vaisseau(
+    id_vaisseau INT,
+    prix INT,
+    poids INT,
+    longueur INT,
+    largeur INT,
+    id_fabriquant INT,
+    CONSTRAINT PK_Vaisseau PRIMARY KEY(id_vaisseau),
+    CONSTRAINT FK_Vaisseau_id_fabriquant FOREIGN KEY(id_fabriquant) REFERENCES Entreprise_Vaisseau(id_entreprise)
+);
+
+
 CREATE TABLE Equipage (
     id_equipage INT,
     nom VARCHAR(50),
@@ -56,16 +68,6 @@ CREATE TABLE Personne(
     CONSTRAINT FK_Personne_id_equipage FOREIGN KEY(id_equipage) REFERENCES Equipage(id_equipage)
 );
     
-CREATE TABLE Vaisseau(
-    id_vaisseau INT,
-    prix INT,
-    poids INT,
-    longueur INT,
-    largeur INT,
-    id_fabriquant INT,
-    CONSTRAINT PK_Vaisseau PRIMARY KEY(id_vaisseau),
-    CONSTRAINT FK_Vaisseau_id_fabriquant FOREIGN KEY(id_fabriquant) REFERENCES Entreprise_Vaisseau(id_entreprise)
-);
 
 CREATE TABLE Chef_Entreprise(
     date_debut DATE,
