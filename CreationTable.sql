@@ -157,8 +157,20 @@ INSERT INTO Entreprise_Vaisseau (id_entreprise) VALUES
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
 
+INSERT INTO Vaisseau (id_vaisseau, prix, poids, longueur, largeur, id_fabriquant) VALUES
+(1, 200000, 5000, 30, 15, 1),
+(2, 180000, 4800, 28, 14, 2),
+(3, 250000, 6000, 35, 18, 3),
+(4, 220000, 5500, 32, 16, 4),
+(5, 190000, 5200, 29, 15, 5),
+(6, 280000, 7000, 40, 20, 6),
+(7, 240000, 6200, 36, 18, 7),
+(8, 210000, 5700, 33, 16, 8),
+(9, 260000, 6500, 38, 19, 9),
+(10, 230000, 5800, 34, 17, 10);
+
 -- Insert into Equipage table
-INSERT INTO Equipage (id_equipage, nom, date_creation, id_entreprise) VALUES
+INSERT INTO Equipage (id_equipage, nom, date_creation, id_vaisseau) VALUES
 (1, 'Crew1', '2023-01-10', 1),
 (2, 'Crew2', '2023-02-20', 2),
 (3, 'Crew3', '2023-03-15', 3),
@@ -184,17 +196,7 @@ INSERT INTO Personne (id_personne, nom, prenom, poste, age, date_naissance, id_e
 (10, 'Person10', 'Olivia', 'Engineer', 29, '1994-11-28', 10, 10);
 
 -- Insert into Vaisseau table
-INSERT INTO Vaisseau (id_vaisseau, prix, poids, longueur, largeur, id_fabriquant) VALUES
-(1, 200000, 5000, 30, 15, 1),
-(2, 180000, 4800, 28, 14, 2),
-(3, 250000, 6000, 35, 18, 3),
-(4, 220000, 5500, 32, 16, 4),
-(5, 190000, 5200, 29, 15, 5),
-(6, 280000, 7000, 40, 20, 6),
-(7, 240000, 6200, 36, 18, 7),
-(8, 210000, 5700, 33, 16, 8),
-(9, 260000, 6500, 38, 19, 9),
-(10, 230000, 5800, 34, 17, 10);
+
 
 -- Insert into Chef_Entreprise table
 INSERT INTO Chef_Entreprise (date_debut, date_fin, id_entreprise, id_personne) VALUES
