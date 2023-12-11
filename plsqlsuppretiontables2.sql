@@ -1,5 +1,3 @@
-prompt "Suppression des relations"
-
 DO $$ 
 BEGIN
     BEGIN
@@ -53,16 +51,6 @@ END $$;
 DO $$ 
 BEGIN
     BEGIN
-        EXECUTE 'DROP TABLE Vaisseau';
-    EXCEPTION
-        WHEN SQLSTATE '42P01' THEN
-            RAISE NOTICE 'Table Vaisseau does not exist';
-    END;
-END $$;
-
-DO $$ 
-BEGIN
-    BEGIN
         EXECUTE 'DROP TABLE Personne';
     EXCEPTION
         WHEN SQLSTATE '42P01' THEN
@@ -77,6 +65,16 @@ BEGIN
     EXCEPTION
         WHEN SQLSTATE '42P01' THEN
             RAISE NOTICE 'Table Equipage does not exist';
+    END;
+END $$;
+
+DO $$ 
+BEGIN
+    BEGIN
+        EXECUTE 'DROP TABLE Vaisseau';
+    EXCEPTION
+        WHEN SQLSTATE '42P01' THEN
+            RAISE NOTICE 'Table Vaisseau does not exist';
     END;
 END $$;
 
