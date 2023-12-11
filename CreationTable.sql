@@ -50,7 +50,7 @@ CREATE TABLE Equipage (
 CREATE TABLE Personne(
     id_personne INT,
     nom VARCHAR(50),
-    prenom VAR(50),
+    prenom VARCHAR(50),
     poste VARCHAR(15),
     age INT,
     date_naissance DATE,
