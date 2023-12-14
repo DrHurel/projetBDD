@@ -8,7 +8,7 @@ CREATE TABLE Modele_Objet(
     nom VARCHAR(64) NOT NULL,
     statut VARCHAR(7) NOT NULL,
     prix INT NOT NULL,
-    masse INT NOT NOT,
+    masse INT NOT NULL,
     CONSTRAINT TYPE_OBJET CHECK (statut IN ('LEGAL','ILLEGAL')),
     CONSTRAINT PK_Modele_Objet_id_objet PRIMARY KEY(id_objet)
 );
