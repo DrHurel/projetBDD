@@ -92,10 +92,10 @@ CREATE TABLE Inventaire_Vaisseau(
     id_vaisseau INT,
     id_objet INT,
     quantite INT,
-    CHECK quantite > 0,
     CONSTRAINT FK_Inventaire_Vaisseau_id_objet FOREIGN KEY(id_objet) REFERENCES Modele_Objet(id_objet),
     CONSTRAINT FK_Inventaire_Vaisseau_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau),
-    CONSTRAINT PK_Inventaire_Vaisseau PRIMARY KEY(id_objet,id_vaisseau)   
+    CONSTRAINT PK_Inventaire_Vaisseau PRIMARY KEY(id_objet,id_vaisseau),
+    CONSTRAINT Valeur_Quantite CHECK(quantite>0)
 ); 
 
 CREATE TABLE Historique_Proprio(
