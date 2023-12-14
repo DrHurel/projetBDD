@@ -35,6 +35,7 @@ CREATE TABLE Entreprise_Objet(
 
 CREATE TABLE Vaisseau(
     id_vaisseau INT,
+    nom VARCHAR(50),
     prix INT NOT NULL,
     poids INT NOT NULL,
     longueur INT NOT NULL,
@@ -159,17 +160,18 @@ INSERT INTO Entreprise_Vaisseau (id_entreprise) VALUES
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
 
-INSERT INTO Vaisseau (id_vaisseau, prix, poids, longueur, largeur, id_fabriquant) VALUES
-(1, 200000, 5000, 30, 15, 1),
-(2, 180000, 4800, 28, 14, 2),
-(3, 250000, 6000, 35, 18, 3),
-(4, 220000, 5500, 32, 16, 4),
-(5, 190000, 5200, 29, 15, 5),
-(6, 280000, 7000, 40, 20, 6),
-(7, 240000, 6200, 36, 18, 7),
-(8, 210000, 5700, 33, 16, 8),
-(9, 260000, 6500, 38, 19, 9),
-(10, 230000, 5800, 34, 17, 10);
+INSERT INTO Vaisseau (id_vaisseau, nom, prix, poids, longueur, largeur, id_fabriquant) VALUES
+(1, 'Constellation', 1000, 500, 30, 20, 1),
+(2, 'Sabre', 1200, 600, 35, 25, 2),
+(3, 'Carrack', 1500, 700, 40, 30, 3),
+(4, 'Hammerhead', 1800, 800, 45, 35, 4),
+(5, 'Starfarer', 2000, 900, 50, 40, 5),
+(6, 'Cutlass Black', 2200, 1000, 55, 45, 6),
+(7, 'Herald', 2500, 1100, 60, 50, 7),
+(8, 'Freelancer MAX', 2800, 1200, 65, 55, 8),
+(9, 'Reclaimer', 3000, 1300, 70, 60, 9),
+(10, 'Pioneer', 3500, 1400, 75, 65, 10);
+
 
 -- Insert into Equipage table
 INSERT INTO Equipage (id_equipage, nom, date_creation, id_vaisseau) VALUES
