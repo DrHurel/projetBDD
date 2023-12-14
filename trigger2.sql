@@ -20,6 +20,8 @@ BEGIN
         NEW.age := age_result -1;
         RETURN NEW;
     END IF;
+
+    RETURN NEW;
     
 END;
 $$ LANGUAGE plpgsql;
