@@ -55,17 +55,19 @@ INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabri
 
 
 -- Insert into Equipage table
+-- Equipage
 INSERT INTO Equipage (id_equipage, nom, date_creation, id_vaisseau) VALUES
-(1, 'Crew1', '2023-01-10', 1),
-(2, 'Crew2', '2023-02-20', 2),
-(3, 'Crew3', '2023-03-15', 3),
-(4, 'Crew4', '2023-04-25', 4),
-(5, 'Crew5', '2023-05-10', 5),
-(6, 'Crew6', '2023-06-25', 6),
-(7, 'Crew7', '2023-07-20', 7),
-(8, 'Crew8', '2023-08-30', 8),
-(9, 'Crew9', '2023-09-12', 9),
-(10, 'Crew10', '2023-10-15', 10);
+    (1, 'Explorer Expedition Team', '2023-01-10', 1),
+    (2, 'Starlight Recon Squadron', '2023-02-20', 2),
+    (3, 'Astro Navigator Crew', '2023-03-15', 3),
+    (4, 'Tech Innovators', '2023-04-25', 4),
+    (5, 'Guardian Security Team', '2023-05-10', 5),
+    (6, 'MedBay Response Unit', '2023-06-25', 6),
+    (7, 'Quantum Research Team', '2023-07-20', 7),
+    (8, 'Comms Connection Crew', '2023-08-30', 8),
+    (9, 'MasterChef and Engineers', '2023-09-12', 9),
+    (10, 'Stellar Engineering Corps', '2023-10-15', 10);
+
 
 -- Insert into Personne table
 -- Personne
