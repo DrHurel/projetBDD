@@ -5,17 +5,18 @@ INSERT INTO Proprietaire (id_proprietaire) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
 
 -- Insert into Modele_Objet table
-INSERT INTO Modele_Objet (id_objet, nom, statut, prix) VALUES
-(1, 'Model1', 'LEGAL', 1000),
-(2, 'Model2', 'ILLEGAL', 1500),
-(3, 'Model3', 'LEGAL', 1200),
-(4, 'Model4', 'ILLEGAL', 1800),
-(5, 'Model5', 'LEGAL', 900),
-(6, 'Model6', 'ILLEGAL', 2000),
-(7, 'Model7', 'LEGAL', 1100),
-(8, 'Model8', 'ILLEGAL', 1600),
-(9, 'Model9', 'LEGAL', 1300),
-(10, 'Model10', 'ILLEGAL', 1700);
+INSERT INTO Modele_Objet (id_objet, nom, statut, prix, masse) VALUES
+(1, 'Quantum Drive', 'LEGAL', 5000, 20),
+(2, 'Plasma Cannon', 'ILLEGAL', 800, 15),
+(3, 'Shield Generator Mk II', 'LEGAL', 3000, 30),
+(4, 'Contraband Data Chip', 'ILLEGAL', 1000, 5),
+(5, 'Medkit', 'LEGAL', 200, 2),
+(6, 'EMP Device', 'ILLEGAL', 1200, 10),
+(7, 'Quantum Fuel', 'LEGAL', 150, 25),
+(8, 'Stealth Cloak', 'ILLEGAL', 2500, 18),
+(9, 'Mining Laser', 'LEGAL', 3500, 40),
+(10, 'Prototype AI Module', 'ILLEGAL', 5000, 12);
+
 
 -- Insert into Entreprise table
 INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
