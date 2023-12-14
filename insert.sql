@@ -41,7 +41,7 @@ INSERT INTO Entreprise_Vaisseau (id_entreprise) VALUES
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
 (1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
 
-INSERT INTO Vaisseau (id_vaisseau, nom, prix, poids, longueur, largeur, id_fabriquant) VALUES
+INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
 (1, 'Constellation', 1000, 500, 30, 20, 1),
 (2, 'Sabre', 1200, 600, 35, 25, 2),
 (3, 'Carrack', 1500, 700, 40, 30, 3),
