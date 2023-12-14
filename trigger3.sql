@@ -1,12 +1,9 @@
 CREATE OR REPLACE FUNCTION is_not_used_by_personne()
 RETURNS TRIGGER AS $$
-DECLARE
-    var_id INTEGER;
+
 BEGIN
     
-    SELECT id INTO var_id FROM Personne WHERE id=NEW.id;
-
-    IF var_id=NEW.id THEN
+    IF EXISTS  SELECT id FROM Personne WHERE id=NEW.id THEN
         RAISE NOTICE 'already a personne';
     END IF;
 
@@ -22,14 +19,11 @@ EXECUTE FUNCTION is_not_used_by_personne();
 
 CREATE OR REPLACE FUNCTION is_not_used_by_vaisseau()
 RETURNS TRIGGER AS $$
-DECLARE
-    var_id INTEGER;
+
 BEGIN
-    
-    SELECT id INTO var_id FROM Vaisseau WHERE id=NEW.id;
 
 
-    IF var_id=NEW.id THEN
+    IF EXISTS  SELECT id FROM Vaisseau WHERE id=NEW.id THEN
         RAISE NOTICE 'already a vaisseau';
     END IF;
 
