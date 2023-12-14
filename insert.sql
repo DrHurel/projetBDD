@@ -69,17 +69,17 @@ INSERT INTO Equipage (id_equipage, nom, date_creation, id_vaisseau) VALUES
 
 -- Insert into Personne table
 -- Personne
-INSERT INTO Personne (id_personne, nom, prenom, poste, age, date_naissance, id_entreprise, id_equipage) VALUES
-    (1, 'Smith', 'John', 'Engineer', 30, '1993-05-20', 1, 1),
-    (2, 'Johnson', 'Jane', 'Pilot', 35, '1988-10-15', 2, 2),
-    (3, 'Williams', 'Bob', 'Navigator', 28, '1995-03-08', 3, 3),
-    (4, 'Davis', 'Alice', 'Technician', 32, '1990-07-18', 4, 4),
-    (5, 'Miller', 'Charlie', 'Security', 27, '1996-01-30', 5, 5),
-    (6, 'Martinez', 'Eva', 'Medic', 40, '1982-12-05', 6, 6),
-    (7, 'Anderson', 'David', 'Scientist', 33, '1989-04-22', 7, 7),
-    (8, 'Brown', 'Sophie', 'Communications', NULL, '1991-09-10', 8, 8),
-    (9, 'Smith', 'Michael', 'Chef', NULL, '1978-06-15', 9, 9),
-    (10, 'Taylor', 'Olivia', 'Engineer', 29, '1994-11-28', 10, 10);
+INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entreprise, id_equipage) VALUES
+    (1, 'Smith', 'John', 'Engineer', '1993-05-20', 1, 1),
+    (2, 'Johnson', 'Jane', 'Pilot', '1988-10-15', 2, 2),
+    (3, 'Williams', 'Bob', 'Navigator', '1995-03-08', 3, 3),
+    (4, 'Davis', 'Alice', 'Technician', '1990-07-18', 4, 4),
+    (5, 'Miller', 'Charlie', 'Security', '1996-01-30', 5, 5),
+    (6, 'Martinez', 'Eva', 'Medic', '1982-12-05', 6, 6),
+    (7, 'Anderson', 'David', 'Scientist', '1989-04-22', 7, 7),
+    (8, 'Brown', 'Sophie', 'Communications', '1991-09-10', 8, 8),
+    (9, 'Smith', 'Michael', 'Chef', '1978-06-15', 9, 9),
+    (10, 'Taylor', 'Olivia', 'Engineer', '1994-11-28', 10, 10);
 
 -- Insert into Vaisseau table
 
