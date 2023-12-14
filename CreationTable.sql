@@ -37,7 +37,7 @@ CREATE TABLE Vaisseau(
     id_vaisseau INT,
     nom VARCHAR(50),
     prix INT NOT NULL,
-    poids INT NOT NULL,
+    masse INT NOT NULL,
     longueur INT NOT NULL,
     largeur INT NOT NULL,
     id_fabriquant INT NOT NULL,
@@ -119,4 +119,3 @@ CREATE TABLE Historique_Vente_Vaisseau(
     CONSTRAINT FK_Historique_Vente_Vaisseau_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise_Vaisseau(id_entreprise),
     CONSTRAINT PK_Historique_Vente_Vaisseau PRIMARY KEY(id_vaisseau,id_entreprise,id_proprietaire,date_vente)
 );
-
