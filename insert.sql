@@ -1,8 +1,10 @@
 
-
--- Insert into Proprietaire table
+-- Proprietaire
 INSERT INTO Proprietaire (id_proprietaire) VALUES
-(1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
+    (1), (2), (3), (4), (5), (6), (7), (8), (9), (10),
+    (11), (12), (13), (14), (15), (16), (17), (18), (19), (20),
+    (21), (22), (23), (24), (25), (26), (27), (28), (29), (30);
+
 
 -- Insert into Modele_Objet table
 INSERT INTO Modele_Objet (id_objet, nom, statut, prix, masse) VALUES
@@ -19,39 +21,42 @@ INSERT INTO Modele_Objet (id_objet, nom, statut, prix, masse) VALUES
 
 
 -- Insert into Entreprise table
+-- Entreprise
 INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
-(1, 'Company1', '2023-01-01'),
-(2, 'Company2', '2023-02-15'),
-(3, 'Company3', '2023-03-10'),
-(4, 'Company4', '2023-04-20'),
-(5, 'Company5', '2023-05-05'),
-(6, 'Company6', '2023-06-30'),
-(7, 'Company7', '2023-07-18'),
-(8, 'Company8', '2023-08-25'),
-(9, 'Company9', '2023-09-08'),
-(10, 'Company10', '2023-10-12');
+    (11, 'Aegis Dynamics', '2023-01-01'),
+    (12, 'Anvil Aerospace', '2023-02-15'),
+    (13, 'Origin Jumpworks', '2023-03-10'),
+    (14, 'Consolidated Outland', '2023-04-20'),
+    (15, 'Drake Interplanetary', '2023-05-05'),
+    (16, 'Esperia', '2023-06-30'),
+    (17, 'RSI (Roberts Space Industries)', '2023-07-18'),
+    (18, 'MISC (Musashi Industrial & Starflight Concern)', '2023-08-25'),
+    (19, 'Crusader Industries', '2023-09-08'),
+    (20, 'Argo Astronautics', '2023-10-12');
+
 
 
 
 -- Insert into Entreprise_Vaisseau table
 INSERT INTO Entreprise_Vaisseau (id_entreprise) VALUES
-(1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
+    (11), (12), (13), (14), (15), (16), (17), (18), (19), (20);
 
 -- Insert into Entreprise_Objet table
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
-(1), (2), (3), (4), (5), (6), (7), (8), (9), (10);
+    (11), (12), (13), (14), (15), (16), (17), (18), (19), (20);
+
 
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
-(1, 'Constellation', 1000, 500, 30, 20, 1),
-(2, 'Sabre', 1200, 600, 35, 25, 2),
-(3, 'Carrack', 1500, 700, 40, 30, 3),
-(4, 'Hammerhead', 1800, 800, 45, 35, 4),
-(5, 'Starfarer', 2000, 900, 50, 40, 5),
-(6, 'Cutlass Black', 2200, 1000, 55, 45, 6),
-(7, 'Herald', 2500, 1100, 60, 50, 7),
-(8, 'Freelancer MAX', 2800, 1200, 65, 55, 8),
-(9, 'Reclaimer', 3000, 1300, 70, 60, 9),
-(10, 'Pioneer', 3500, 1400, 75, 65, 10);
+(1, 'Constellation', 1000, 500, 30, 20, 11),
+(2, 'Sabre', 1200, 600, 35, 25, 12),
+(3, 'Carrack', 1500, 700, 40, 30, 13),
+(4, 'Hammerhead', 1800, 800, 45, 35, 14),
+(5, 'Starfarer', 2000, 900, 50, 40, 15),
+(6, 'Cutlass Black', 2200, 1000, 55, 45, 16),
+(7, 'Herald', 2500, 1100, 60, 50, 17),
+(8, 'Freelancer MAX', 2800, 1200, 65, 55, 18),
+(9, 'Reclaimer', 3000, 1300, 70, 60, 19),
+(10, 'Pioneer', 3500, 1400, 75, 65, 20);
 
 
 -- Insert into Equipage table
@@ -72,45 +77,45 @@ INSERT INTO Equipage (id_equipage, nom, date_creation, id_vaisseau) VALUES
 -- Insert into Personne table
 -- Personne
 INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entreprise, id_equipage) VALUES
-    (1, 'Smith', 'John', 'Engineer', '1993-05-20', 1, 1),
-    (2, 'Johnson', 'Jane', 'Pilot', '1988-10-15', 2, 2),
-    (3, 'Williams', 'Bob', 'Navigator', '1995-03-08', 3, 3),
-    (4, 'Davis', 'Alice', 'Technician', '1990-07-18', 4, 4),
-    (5, 'Miller', 'Charlie', 'Security', '1996-01-30', 5, 5),
-    (6, 'Martinez', 'Eva', 'Medic', '1982-12-05', 6, 6),
-    (7, 'Anderson', 'David', 'Scientist', '1989-04-22', 7, 7),
-    (8, 'Brown', 'Sophie', 'Communications', '1991-09-10', 8, 8),
-    (9, 'Smith', 'Michael', 'Chef', '1978-06-15', 9, 9),
-    (10, 'Taylor', 'Olivia', 'Engineer', '1994-11-28', 10, 10);
+    (1, 'Smith', 'John', 'Engineer', '1993-05-20', 11, 1),
+    (2, 'Johnson', 'Jane', 'Pilot', '1988-10-15', 12, 2),
+    (3, 'Williams', 'Bob', 'Navigator', '1995-03-08', 13, 3),
+    (4, 'Davis', 'Alice', 'Technician', '1990-07-18', 14, 4),
+    (5, 'Miller', 'Charlie', 'Security', '1996-01-30', 15, 5),
+    (6, 'Martinez', 'Eva', 'Medic', '1982-12-05', 16, 6),
+    (7, 'Anderson', 'David', 'Scientist', '1989-04-22', 17, 7),
+    (8, 'Brown', 'Sophie', 'Communications', '1991-09-10', 18, 8),
+    (9, 'Smith', 'Michael', 'Chef', '1978-06-15', 19, 9),
+    (10, 'Taylor', 'Olivia', 'Engineer', '1994-11-28', 20, 10);
 
 -- Insert into Vaisseau table
 
 
 -- Insert into Chef_Entreprise table
-INSERT INTO Chef_Entreprise (date_debut, date_fin, id_entreprise, id_personne) VALUES
-('2023-01-01', '2023-03-01', 1, 1),
-('2023-02-15', '2023-04-15', 2, 2),
-('2023-03-10', '2023-05-10', 3, 3),
-('2023-04-20', '2023-06-20', 4, 4),
-('2023-05-05', '2023-07-05', 5, 5),
-('2023-06-30', '2023-08-30', 6, 6),
-('2023-07-18', '2023-09-18', 7, 7),
-('2023-08-25', '2023-10-25', 8, 8),
-('2023-09-08', '2023-11-08', 9, 9),
-('2023-10-12', '2023-12-12', 10, 10);
+INSERT INTO Chef_Entreprise (date_debut, date_fin,id_personne,id_entreprise) VALUES
+('2023-01-01', '2023-03-01', 1, 11),
+('2023-02-15', '2023-04-15', 2, 12),
+('2023-03-10', '2023-05-10', 3, 13),
+('2023-04-20', '2023-06-20', 4, 14),
+('2023-05-05', '2023-07-05', 5, 15),
+('2023-06-30', '2023-08-30', 6, 16),
+('2023-07-18', '2023-09-18', 7, 17),
+('2023-08-25', '2023-10-25', 8, 18),
+('2023-09-08', '2023-11-08', 9, 19),
+('2023-10-12', '2023-12-12', 10, 20);
 
 -- Insert into Gamme_Vente_Objet table
 INSERT INTO Gamme_Vente_Objet (id_fabriquant, id_objet) VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
-(10, 10);
+(11, 1),
+(12, 2),
+(13, 3),
+(14, 4),
+(15, 5),
+(16, 6),
+(17, 7),
+(18, 8),
+(19, 9),
+(20, 10);
 
 -- Insert into Inventaire_Vaisseau table
 INSERT INTO Inventaire_Vaisseau (id_vaisseau, id_objet, quantite) VALUES
@@ -140,13 +145,14 @@ INSERT INTO Historique_Proprio (id_vaisseau, id_proprietaire, date_debut, date_f
 
 -- Insert into Historique_Vente_Vaisseau table
 INSERT INTO Historique_Vente_Vaisseau (id_vaisseau, id_entreprise, id_proprietaire, date_vente) VALUES
-(1, 1, 1, '2023-01-15'),
-(2, 2, 2, '2023-02-28'),
-(3, 3, 3, '2023-03-25'),
-(4, 4, 4, '2023-04-28'),
-(5, 5, 5, '2023-05-15'),
-(6, 6, 6, '2023-06-30'),
-(7, 7, 7, '2023-07-28'),
-(8, 8, 8, '2023-08-30'),
-(9, 9, 9, '2023-09-15'),
-(10, 10, 10, '2023-10-20');
+    (1, 11, 1, '2023-01-15'),
+    (2, 12, 2, '2023-02-28'),
+    (3, 13, 1, '2023-03-25'),
+    (4, 14, 4, '2023-04-28'),
+    (5, 15, 5, '2023-05-15'),
+    (6, 16, 6, '2023-06-30'),
+    (7, 17, 2, '2023-07-28'),
+    (8, 17, 18, '2023-08-30'),
+    (9, 11, 19, '2023-09-15'),
+    (10, 18, 20, '2023-10-20');
+
