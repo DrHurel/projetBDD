@@ -45,7 +45,7 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE PROCEDURE afficher_informations_equipage_de_tout_les_vaisseaux()
+CREATE OR REPLACE PROCEDURE afficher_informations_equipage_de_tous_les_vaisseaux()
 LANGUAGE plpgsql
 AS $$
 DECLARE
