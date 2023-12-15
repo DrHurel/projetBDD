@@ -23,6 +23,8 @@ CREATE TABLE Entreprise(
 
 CREATE TABLE Entreprise_Vaisseau(
     id_entreprise INT,
+    categorie VARCHAR(50) NOT NULL,
+    CONSTRAINT Categorie_Entreprise_Vaisseau CHECK(categorie IN ('Combat','Transport','Exploration','Industrial','Support','Competition','Ground','Multi')),
     CONSTRAINT FK_Entreprise_Vaisseau_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise),
     CONSTRAINT PK_Entreprise_Vaisseau PRIMARY KEY(id_entreprise)
 );
