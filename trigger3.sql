@@ -3,7 +3,7 @@ RETURNS TRIGGER AS $$
 
 BEGIN
     IF NOT EXISTS (SELECT id_proprietaire FROM Proprietaire WHERE id_proprietaire=NEW.id_entreprise) THEN
-        INSERT INTO Proprietaire (id_proprietaire) VALUES NEW.id_entreprise;
+        INSERT INTO Proprietaire (id_proprietaire) VALUES (NEW.id_entreprise);
         RETURN NEW;
     END IF;
 
@@ -26,7 +26,7 @@ RETURNS TRIGGER AS $$
 
 BEGIN
     IF NOT EXISTS (SELECT id_proprietaire FROM Proprietaire WHERE id_proprietaire=NEW.id_personne) THEN
-        INSERT INTO Proprietaire (id_proprietaire) VALUES NEW.id_personne;
+        INSERT INTO Proprietaire (id_proprietaire) VALUES (NEW.id_personne);
         RETURN NEW;
     END IF;
 
