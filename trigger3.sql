@@ -17,7 +17,7 @@ $$ LANGUAGE plpgsql;
 
 -- Créer le déclencheur
 CREATE OR REPLACE TRIGGER trigger_is_not_used_by_personne
-AFTER INSERT OR UPDATE ON Entreprise
+BEFORE INSERT OR UPDATE ON Entreprise
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_personne();
 
@@ -40,6 +40,6 @@ $$ LANGUAGE plpgsql;
 
 -- Créer le déclencheur
 CREATE OR REPLACE TRIGGER trigger_is_not_used_by_vaisseau
-AFTER INSERT OR UPDATE ON Personne
+BEFORE INSERT OR UPDATE ON Personne
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_Entreprise();
