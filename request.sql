@@ -1,0 +1,1 @@
+SELECT * FROM Entreprise_Object WHERE id_entreprise IN SELECT id_entreprise FROM Entreprise_Objet JOIN Gamme_Vente_Objet ON id_fabriquant=id_entreprise JOIN Modele_Objet ON Modele_Objet.id_objet=Gamme_Vente_Objet.id_objet WHERE statut<>"Illegal";
