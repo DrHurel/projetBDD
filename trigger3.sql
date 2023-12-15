@@ -2,7 +2,11 @@ CREATE OR REPLACE FUNCTION is_not_used_by_personne()
 RETURNS TRIGGER AS $$
 
 BEGIN
-    
+    IF NOT EXISTS (SELECT id_proprietaire FROM Proprietaire WHERE id_proprietaire=NEW.id_entreprise) THEN
+        INSERT INTO Proprietaire (id_proprietaire) VALUES NEW.id_entreprise;
+        RETURN NEW;
+    END IF;
+
     IF EXISTS (SELECT id_personne FROM Personne WHERE id_personne=NEW.id_entreprise) THEN
         RAISE NOTICE 'already a personne';
     END IF;
@@ -21,7 +25,10 @@ CREATE OR REPLACE FUNCTION is_not_used_by_entreprise()
 RETURNS TRIGGER AS $$
 
 BEGIN
-
+    IF NOT EXISTS (SELECT id_proprietaire FROM Proprietaire WHERE id_proprietaire=NEW.id_personne) THEN
+        INSERT INTO Proprietaire (id_proprietaire) VALUES NEW.id_personne;
+        RETURN NEW;
+    END IF;
 
     IF EXISTS (SELECT id_entreprise FROM Entreprise WHERE id_entreprise=NEW.id_personne) THEN
         RAISE NOTICE 'already a vaisseau';
