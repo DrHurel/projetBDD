@@ -13,6 +13,14 @@ BEGIN
         ORDER BY id_proprietaire
     LOOP
         current_id := id_proprietaire;
+        IF 
+            EXISTS (SELECT id_personne FROM Personne WHERE id_personne=current_id) 
+            OR 
+            EXISTS (SELECT id_entreprise FROM Entreprise WHERE id_entreprise=current_id) 
+        THEN
+            RETURN NEXT current_id.
+        END IF;
+
         WHILE current_id - pres_id > 1 LOOP
             current_id := current_id +1;
             RETURN NEXT current_id;
