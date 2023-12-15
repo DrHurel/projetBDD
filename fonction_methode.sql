@@ -119,3 +119,22 @@ BEGIN
     VALUES (vaisseau_idD, source_id,destination_id, date_transfer);
 END;
 $$;
+
+
+CREATE OR REPLACE FUNCTION calculer_prix_total_objets_entreprise(IN entreprise_idD INT)
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    prix_total INTEGER := 0;
+BEGIN
+    SELECT COALESCE(SUM(mo.prix), 0)
+    INTO prix_total
+    FROM Entreprise_Objet eo 
+    JOIN Gamme_Vente_Objet gvo on eo.id_entreprise = gvo.id_fabriquant
+    JOIN Modele_Objet mo ON gvo.id_objet = mo.id_objet
+    WHERE eo.id_entreprise = entreprise_idD;
+
+    RETURN prix_total;
+END;
+$$;
