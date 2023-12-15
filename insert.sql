@@ -38,8 +38,8 @@ INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
 
 
 -- Insert into Entreprise_Vaisseau table
-INSERT INTO Entreprise_Vaisseau (id_entreprise) VALUES
-    (11), (12), (13), (14), (15), (16), (17), (18), (19), (20);
+INSERT INTO Entreprise_Vaisseau (id_entreprise, categorie) VALUES
+    (11,'Combat'), (12,'Transport'), (13,'Exploration'), (14,'Industrial'), (15,'Support'), (16,'Competition'), (17,'Ground'), (18,'Multi'), (19,'Exploration'), (20,'Transport');
 
 -- Insert into Entreprise_Objet table
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
