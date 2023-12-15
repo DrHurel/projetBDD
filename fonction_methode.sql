@@ -82,3 +82,24 @@ BEGIN
     RAISE NOTICE '+------+-------------+----------+-----------+--------+----------------+';
 END;
 $$;
+
+
+
+
+
+CREATE OR REPLACE FUNCTION NombreObjetsIllegauxEntreprise (entreprise_id INT) 
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+DECLARE 
+    nb_objet INT := 0;
+BEGIN
+    SELECT COUNT(*) INTO nb_objet
+    FROM Modele_Objet mo
+    INNER JOIN Gamme_Vente_Objet gvo ON mo.id_objet = gvo.id_objet
+    WHERE mo.statut = 'ILLEGAL' AND gvo.id_fabriquant = entreprise_id;
+    /*RAISE NOTICE '| % |',
+        lpad(nb_objet::text, 4, ' ');*/
+    RETURN nb_objet;
+END;
+$$;
