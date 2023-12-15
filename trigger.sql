@@ -31,3 +31,28 @@ CREATE TRIGGER trigger_vaisseau_check_masse_objet
 AFTER INSERT OR UPDATE ON Inventaire_Vaisseau
 FOR EACH ROW
 EXECUTE FUNCTION check_masse();
+
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION check_chef_entreprise_majeur()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.date_debut IS NOT NULL THEN
+        IF (SELECT age FROM Personne WHERE id_personne = NEW.id_personne) < 18 THEN
+            RAISE EXCEPTION 'Le chef d''entreprise doit être une personne majeure';
+        END IF;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Création du trigger pour INSERT
+CREATE TRIGGER trigger_check_chef_entreprise_majeur_insert
+BEFORE INSERT OR UPDATE ON Chef_Entreprise
+FOR EACH ROW
+EXECUTE FUNCTION check_chef_entreprise_majeur();
