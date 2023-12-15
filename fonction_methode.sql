@@ -103,3 +103,19 @@ BEGIN
     RETURN nb_objet;
 END;
 $$;
+
+
+
+--Procédure pour transférer un vaisseau d'une entreprise à une autre avec mise à jour de l'historique :
+CREATE PROCEDURE TransfertVaisseau (IN vaisseau_idD INT,IN source_id INT,IN destination_id INT,IN date_transfer DATE)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE Historique_Proprio
+    SET date_fin = date_transfer
+    WHERE id_vaisseau = vaisseau_idD AND date_fin IS NULL;
+
+    INSERT INTO Historique_Vente_Vaisseau (id_vaisseau, id_entreprise, id_proprietaire, date_vente)
+    VALUES (vaisseau_idD, source_id,destination_id, date_transfer);
+END;
+$$;
