@@ -107,7 +107,7 @@ $$;
 
 
 --Procédure pour transférer un vaisseau d'une entreprise à une autre avec mise à jour de l'historique :
-CREATE PROCEDURE TransfertVaisseau (IN vaisseau_idD INT,IN source_id INT,IN destination_id INT,IN date_transfer DATE)
+CREATE OR REPLACE PROCEDURE TransfertVaisseau (IN vaisseau_idD INT,IN source_id INT,IN destination_id INT,IN date_transfer DATE)
 LANGUAGE plpgsql
 AS $$
 BEGIN
