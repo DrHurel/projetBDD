@@ -121,6 +121,7 @@ INSERT INTO Chef_Entreprise (date_debut, date_fin,id_personne,id_entreprise) VAL
 ('2023-09-08', '2023-11-08', 9, 19),
 ('2023-10-12', '2023-12-12', 10, 20);
 
+
 -- Insert into Gamme_Vente_Objet table
 INSERT INTO Gamme_Vente_Objet (id_fabriquant, id_objet) VALUES
 (11, 1),

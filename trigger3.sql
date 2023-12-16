@@ -31,7 +31,7 @@ BEGIN
     END IF;
 
     IF EXISTS (SELECT id_entreprise FROM Entreprise WHERE id_entreprise=NEW.id_personne) THEN
-        RAISE NOTICE 'already a vaisseau';
+        RAISE NOTICE 'already a enterprise';
     END IF;
 
     RETURN NEW;
@@ -39,7 +39,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Créer le déclencheur
-CREATE OR REPLACE TRIGGER trigger_is_not_used_by_vaisseau
+CREATE OR REPLACE TRIGGER trigger_is_not_used_by_entreprise
 BEFORE INSERT OR UPDATE ON Personne
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_Entreprise();
