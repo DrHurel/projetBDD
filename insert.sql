@@ -46,6 +46,7 @@ INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
     (20, 'Argo Astronautics', '2023-10-12'),
     (21, 'MicroTech', '2023-11-15'),
     (22, 'Hurston Dynamics', '2023-12-20'),
+    (23, 'Snappy Food', '2023-12-20'),
     (24, 'ArcCorp', '2024-01-25'),
     (25, 'Aopoa', '2024-03-10');
 
