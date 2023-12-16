@@ -2,10 +2,6 @@ CREATE OR REPLACE FUNCTION is_not_used_by_entrepise_objet()
 RETURNS TRIGGER AS $$
 
 BEGIN
-    IF NOT EXISTS (SELECT id_entreprise FROM Entreprise WHERE id_entreprise=NEW.id_entreprise) THEN
-        INSERT INTO Entreprise (id_entreprise) VALUES (NEW.id_entreprise);
-        RETURN NEW;
-    END IF;
 
     IF EXISTS (SELECT id_entreprise FROM Entreprise_Objet WHERE id_entreprise=NEW.id_entreprise) THEN
         RAISE NOTICE 'already a Entreprise Objet';
@@ -25,10 +21,6 @@ CREATE OR REPLACE FUNCTION is_not_used_by_entreprise_vaisseau()
 RETURNS TRIGGER AS $$
 
 BEGIN
-    IF NOT EXISTS (SELECT id_entreprise FROM Entreprise WHERE id_entreprise=NEW.id_entreprise) THEN
-        INSERT INTO Entreprise (id_entreprise) VALUES (NEW.id_entreprise);
-        RETURN NEW;
-    END IF;
 
     IF EXISTS (SELECT id_entreprise FROM Entreprise_Vaisseau WHERE id_entreprise=NEW.id_entreprise) THEN
         RAISE NOTICE 'already a enterprise vaisseau';
