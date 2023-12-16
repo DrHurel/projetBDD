@@ -107,15 +107,30 @@ INSERT INTO Chef_Entreprise (date_debut, date_fin,id_personne,id_entreprise) VAL
 -- Insert into Gamme_Vente_Objet table
 INSERT INTO Gamme_Vente_Objet (id_fabriquant, id_objet) VALUES
 (11, 1),
+(11, 3),
+(11, 5),
+(11, 7),
+(11, 9),
 (12, 2),
+(12, 4),
+(12, 6),
+(12, 8),
+(12, 10),
 (13, 3),
+(13, 1),
+(13, 2),
 (14, 4),
+(14, 1),
 (15, 5),
 (16, 6),
+(16, 1),
+(16, 3),
 (17, 7),
 (18, 8),
+(18, 5),
 (19, 9),
-(20, 10);
+(20, 10),
+(20, 9);
 
 -- Insert into Inventaire_Vaisseau table
 INSERT INTO Inventaire_Vaisseau (id_vaisseau, id_objet, quantite) VALUES
