@@ -17,7 +17,7 @@ CREATE TABLE Entreprise(
     id_entreprise INT,
     nom_entreprise VARCHAR(50) NOT NULL,
     data_creation DATE NOT NULL,
-    CONSTRAINT FK_Entreprise_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Proprietaire(id_proprietaire),
+    CONSTRAINT FK_Entreprise_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Proprietaire(id_proprietaire) ON DELETE CASCADE,
     CONSTRAINT PK_Entreprise PRIMARY KEY(id_entreprise)
 ); 
 
@@ -25,13 +25,13 @@ CREATE TABLE Entreprise_Vaisseau(
     id_entreprise INT,
     categorie VARCHAR(50) NOT NULL,
     CONSTRAINT Categorie_Entreprise_Vaisseau CHECK(categorie IN ('Combat','Transport','Exploration','Industrial','Support','Competition','Ground','Multi')),
-    CONSTRAINT FK_Entreprise_Vaisseau_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise),
+    CONSTRAINT FK_Entreprise_Vaisseau_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise) ON DELETE CASCADE,
     CONSTRAINT PK_Entreprise_Vaisseau PRIMARY KEY(id_entreprise)
 );
 
 CREATE TABLE Entreprise_Objet(
     id_entreprise INT,
-    CONSTRAINT FK_Entreprise_Objet_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise),
+    CONSTRAINT FK_Entreprise_Objet_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise) ON DELETE CASCADE,
     CONSTRAINT PK_Entreprise_Objet PRIMARY KEY(id_entreprise)
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE Vaisseau(
     largeur INT NOT NULL,
     id_fabriquant INT NOT NULL,
     CONSTRAINT PK_Vaisseau PRIMARY KEY(id_vaisseau),
-    CONSTRAINT FK_Vaisseau_id_fabriquant FOREIGN KEY(id_fabriquant) REFERENCES Entreprise_Vaisseau(id_entreprise)
+    CONSTRAINT FK_Vaisseau_id_fabriquant FOREIGN KEY(id_fabriquant) REFERENCES Entreprise_Vaisseau(id_entreprise) ON DELETE CASCADE
 );
 
 
@@ -54,7 +54,7 @@ CREATE TABLE Equipage (
     date_creation DATE NOT NULL,
     id_vaisseau INT NOT NULL,
     CONSTRAINT PK_Equipe_id_equipage PRIMARY KEY(id_equipage),
-    CONSTRAINT FK_Equipage_id_entreprise FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau) 
+    CONSTRAINT FK_Equipage_id_entreprise FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau) ON DELETE CASCADE
 );
 
 CREATE TABLE Personne(
@@ -66,10 +66,10 @@ CREATE TABLE Personne(
     date_naissance DATE NOT NULL,
     id_entreprise INT,
     id_equipage INT,
-    CONSTRAINT FK_Personne_id_proprietaire FOREIGN KEY(id_personne) REFERENCES Proprietaire(id_proprietaire),
+    CONSTRAINT FK_Personne_id_proprietaire FOREIGN KEY(id_personne) REFERENCES Proprietaire(id_proprietaire) ON DELETE CASCADE,
     CONSTRAINT PK_Personne PRIMARY KEY(id_personne),
-    CONSTRAINT FK_Personne_id_Entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise),
-    CONSTRAINT FK_Personne_id_equipage FOREIGN KEY(id_equipage) REFERENCES Equipage(id_equipage)
+    CONSTRAINT FK_Personne_id_Entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise) ON DELETE CASCADE,
+    CONSTRAINT FK_Personne_id_equipage FOREIGN KEY(id_equipage) REFERENCES Equipage(id_equipage) ON DELETE CASCADE
 );
     
 
@@ -78,16 +78,16 @@ CREATE TABLE Chef_Entreprise(
     date_fin DATE,
     id_entreprise INT NOT NULL,
     id_personne INT NOT NULL,
-    CONSTRAINT FK_Chef_Entreprise_id_personne FOREIGN KEY (id_personne) REFERENCES Personne(id_personne),
-    CONSTRAINT FK_Chef_Entreprise_ID_Entreprise FOREIGN KEY (id_entreprise) REFERENCES Entreprise(id_entreprise),
+    CONSTRAINT FK_Chef_Entreprise_id_personne FOREIGN KEY (id_personne) REFERENCES Personne(id_personne) ON DELETE CASCADE,
+    CONSTRAINT FK_Chef_Entreprise_ID_Entreprise FOREIGN KEY (id_entreprise) REFERENCES Entreprise(id_entreprise) ON DELETE CASCADE,
     CONSTRAINT PK_Chef_Entreprise PRIMARY KEY(id_entreprise,id_personne,date_debut)   
 );
 
 CREATE TABLE Gamme_Vente_Objet(
     id_fabriquant INT,
     id_objet INT,
-    CONSTRAINT FK_Gamme_Vente_Objet_id_fabriquant FOREIGN KEY(id_fabriquant) REFERENCES Entreprise_Objet(id_entreprise),
-    CONSTRAINT FK_Gamme_Vente_Objet_id_objet FOREIGN KEY(id_objet) REFERENCES Modele_Objet(id_objet),
+    CONSTRAINT FK_Gamme_Vente_Objet_id_fabriquant FOREIGN KEY(id_fabriquant) REFERENCES Entreprise_Objet(id_entreprise) ON DELETE CASCADE,
+    CONSTRAINT FK_Gamme_Vente_Objet_id_objet FOREIGN KEY(id_objet) REFERENCES Modele_Objet(id_objet) ON DELETE CASCADE,
     CONSTRAINT PK_Gamme_Vente_Objet PRIMARY KEY(id_objet,id_fabriquant)   
 );
 
@@ -95,8 +95,8 @@ CREATE TABLE Inventaire_Vaisseau(
     id_vaisseau INT,
     id_objet INT,
     quantite INT,
-    CONSTRAINT FK_Inventaire_Vaisseau_id_objet FOREIGN KEY(id_objet) REFERENCES Modele_Objet(id_objet),
-    CONSTRAINT FK_Inventaire_Vaisseau_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau),
+    CONSTRAINT FK_Inventaire_Vaisseau_id_objet FOREIGN KEY(id_objet) REFERENCES Modele_Objet(id_objet) ON DELETE CASCADE,
+    CONSTRAINT FK_Inventaire_Vaisseau_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau)ON DELETE CASCADE,
     CONSTRAINT PK_Inventaire_Vaisseau PRIMARY KEY(id_objet,id_vaisseau),
     CONSTRAINT Valeur_Quantite CHECK(quantite>0)
 ); 
@@ -107,8 +107,8 @@ CREATE TABLE Historique_Proprio(
     date_debut DATE,
     date_fin DATE,
     CONSTRAINT PK_Historique_Proprio PRIMARY KEY(date_debut,id_proprietaire,id_vaisseau),
-    CONSTRAINT FK_Historique_Proprio_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau),
-    CONSTRAINT FK_Historique_Proprio_id_proprietaire FOREIGN KEY(id_proprietaire) REFERENCES Proprietaire(id_proprietaire)
+    CONSTRAINT FK_Historique_Proprio_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau) ON DELETE CASCADE,
+    CONSTRAINT FK_Historique_Proprio_id_proprietaire FOREIGN KEY(id_proprietaire) REFERENCES Proprietaire(id_proprietaire) ON DELETE CASCADE
 );
 
 CREATE TABLE Historique_Vente_Vaisseau(
@@ -116,8 +116,8 @@ CREATE TABLE Historique_Vente_Vaisseau(
     id_entreprise INT,
     id_proprietaire INT,
     date_vente DATE,
-    CONSTRAINT FK_Historique_Vente_Vaisseau_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau),
-    CONSTRAINT FK_Historique_Vente_Vaisseau_id_proprietaire FOREIGN KEY(id_proprietaire) REFERENCES Proprietaire(id_proprietaire),
-    CONSTRAINT FK_Historique_Vente_Vaisseau_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise_Vaisseau(id_entreprise),
+    CONSTRAINT FK_Historique_Vente_Vaisseau_id_vaisseau FOREIGN KEY(id_vaisseau) REFERENCES Vaisseau(id_vaisseau) ON DELETE CASCADE,
+    CONSTRAINT FK_Historique_Vente_Vaisseau_id_proprietaire FOREIGN KEY(id_proprietaire) REFERENCES Proprietaire(id_proprietaire) ON DELETE CASCADE,
+    CONSTRAINT FK_Historique_Vente_Vaisseau_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise_Vaisseau(id_entreprise) ON DELETE CASCADE,
     CONSTRAINT PK_Historique_Vente_Vaisseau PRIMARY KEY(id_vaisseau,id_entreprise,id_proprietaire,date_vente)
 );
