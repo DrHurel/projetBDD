@@ -19,7 +19,7 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE TRIGGER trigger_is_not_used_by_entreprise_objet
 BEFORE INSERT OR UPDATE ON Entreprise_Vaisseau
 FOR EACH ROW
-EXECUTE FUNCTION is_not_used_by_personne();
+EXECUTE FUNCTION is_not_used_by_entrepise_objet();
 
 CREATE OR REPLACE FUNCTION is_not_used_by_entreprise_vaisseau()
 RETURNS TRIGGER AS $$
