@@ -17,7 +17,18 @@ INSERT INTO Modele_Objet (id_objet, nom, statut, prix, masse) VALUES
 (7, 'Quantum Fuel', 'LEGAL', 150, 25),
 (8, 'Stealth Cloak', 'ILLEGAL', 2500, 18),
 (9, 'Mining Laser', 'LEGAL', 3500, 40),
-(10, 'Prototype AI Module', 'ILLEGAL', 5000, 12);
+(10, 'Prototype AI Module', 'ILLEGAL', 5000, 12),
+(11, 'Aegis Avenger Stalker Module', 'LEGAL', 2000, 15),
+(12, 'Mantis GT-220 Plasma Cannon', 'ILLEGAL', 1200, 8),
+(13, 'Origin 3M Shield Generator', 'LEGAL', 4000, 25),
+(14, 'Crusader Mercury Star Runner Data Chip', 'ILLEGAL', 800, 10),
+(15, 'RSI Apollo Medkit', 'LEGAL', 700, 5),
+(16, 'Archer EMP Device', 'ILLEGAL', 1500, 12),
+(17, 'CryAstro Quantum Fuel', 'LEGAL', 1000, 18),
+(18, 'Sabre Raven Stealth Cloak', 'ILLEGAL', 3000, 30),
+(19, 'RSI Orion Mining Laser', 'LEGAL', 250, 8),
+(20, 'Vanduul Blade Prototype AI Module', 'ILLEGAL', 4000, 15);
+
 
 
 -- Insert into Entreprise table
@@ -32,7 +43,13 @@ INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
     (17, 'RSI (Roberts Space Industries)', '2023-07-18'),
     (18, 'MISC (Musashi Industrial & Starflight Concern)', '2023-08-25'),
     (19, 'Crusader Industries', '2023-09-08'),
-    (20, 'Argo Astronautics', '2023-10-12');
+    (20, 'Argo Astronautics', '2023-10-12'),
+    (21, 'MicroTech', '2023-11-15'),
+    (22, 'Hurston Dynamics', '2023-12-20'),
+    (24, 'ArcCorp', '2024-01-25'),
+    (25, 'Aopoa', '2024-03-10');
+
+
 
 
 
@@ -131,6 +148,7 @@ INSERT INTO Gamme_Vente_Objet (id_fabriquant, id_objet) VALUES
 (19, 9),
 (20, 10),
 (20, 9);
+
 
 -- Insert into Inventaire_Vaisseau table
 INSERT INTO Inventaire_Vaisseau (id_vaisseau, id_objet, quantite) VALUES
