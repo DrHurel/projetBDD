@@ -60,7 +60,7 @@ INSERT INTO Entreprise_Vaisseau (id_entreprise, categorie) VALUES
 
 -- Insert into Entreprise_Objet table
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
-    (11), (12), (13), (14), (15), (16), (17), (18), (19), (20);
+    (21), (22), (23), (24), (25);
 
 
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
@@ -124,31 +124,22 @@ INSERT INTO Chef_Entreprise (date_debut, date_fin,id_personne,id_entreprise) VAL
 
 -- Insert into Gamme_Vente_Objet table
 INSERT INTO Gamme_Vente_Objet (id_fabriquant, id_objet) VALUES
-(11, 1),
-(11, 3),
-(11, 5),
-(11, 7),
-(11, 9),
-(12, 2),
-(12, 4),
-(12, 6),
-(12, 8),
-(12, 10),
-(13, 3),
-(13, 1),
-(13, 2),
-(14, 4),
-(14, 1),
-(15, 5),
-(16, 6),
-(16, 1),
-(16, 3),
-(17, 7),
-(18, 8),
-(18, 5),
-(19, 9),
-(20, 10),
-(20, 9);
+(21, 1),
+(21, 3),
+(21, 5),
+(21, 7),
+(21, 9),
+(22, 2),
+(22, 4),
+(22, 6),
+(22, 8),
+(22, 10),
+(23, 3),
+(23, 1),
+(23, 2),
+(24, 4),
+(24, 1),
+(25, 5);
 
 
 -- Insert into Inventaire_Vaisseau table
