@@ -146,10 +146,31 @@ SELECT listFreeId();
 CALL afficher_informations_equipage(1);
 CALL afficher_informations_equipage(100);
 
-SELECT NombreObjetsIllegauxEntreprise(26);
-SELECT NombreObjetsIllegauxEntreprise(100);
-SELECT NombreObjetsIllegauxEntreprise(400);
+--test fonction NombreObjetsIllegauxEntreprise, entreprise avec des objets illégaux
+select NombreObjetsIllegauxEntreprise(22);
 
-CALL TransfertVaisseau(1,2,3,'2001-05-20');
+--test fonction NombreObjetsIllegauxEntreprise, entreprise sans objets illégaux
+select NombreObjetsIllegauxEntreprise(21);
 
 SELECT calculer_prix_total_objets_entreprise(24);
+
+--test procedure afficher_informations_equipage_de_tous_les_vaisseaux
+call afficher_informations_equipage_de_tous_les_vaisseaux();
+
+--test procedure TransfertVaisseau
+INSERT INTO Proprietaire (id_proprietaire) VALUES (75),(76);
+INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES (75, 'torp cher','2023-04-12'),(76, 'merci','2023-07-04');
+INSERT INTO Entreprise_Vaisseau (id_entreprise, specialite) VALUES (75,'Combat'),(76,'Industrial');
+INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES (42942, 'M2', 1000, 500, 30, 20, 75);
+INSERT INTO Historique_Proprio (id_vaisseau, id_proprietaire, date_debut, date_fin) VALUES (42942, 75, '2023-01-01', NULL);
+
+select * 
+from Historique_Vente_Vaisseau
+where id_vaisseau = 42942 AND id_entreprise=75 AND id_proprietaire=76 AND date_vente='2023-12-19';
+
+call TransfertVaisseau(42942,75,76,'2023-12-19');
+
+select * 
+from Historique_Vente_Vaisseau
+where id_vaisseau = 42942 AND id_entreprise=75 AND id_proprietaire=76 AND date_vente='2023-12-19';
+
