@@ -70,7 +70,7 @@ EXECUTE FUNCTION update_age();
 
 -- TEST
 
-BEGIN TRANSACTION;
+BEGIN TRANSACTION; --insert sans age
 
 INSERT INTO Proprietaire (id_proprietaire) VALUES (1);
 
@@ -79,7 +79,7 @@ SELECT id_personne,age,date_naissance FROM Personne;
 
 ROLLBACK;
 
-BEGIN TRANSACTION;
+BEGIN TRANSACTION; --insert avec mauvais age
 
 INSERT INTO Proprietaire (id_proprietaire) VALUES (1);
 
