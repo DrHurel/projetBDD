@@ -149,3 +149,4 @@ DROP FUNCTION IF EXISTS NombreObjetsIllegauxEntreprise (IN INT);
 DROP PROCEDURE IF EXISTS TransfertVaisseau(IN INT, IN INT, IN INT, IN DATE);
 DROP FUNCTION IF EXISTS calculer_prix_total_objets_entreprise(IN INT);
 DROP FUNCTION IF EXISTS listFreeId();
+DROP FUNCTION IF EXISTS ecart_type_age_entreprise(IN INT);
