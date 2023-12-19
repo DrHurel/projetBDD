@@ -76,7 +76,7 @@ INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabri
 (8, 'Freelancer MAX', 2800, 1200, 65, 55, 18),
 (9, 'Reclaimer', 3000, 1300, 70, 60, 19),
 (10, 'Pioneer', 3500, 1400, 75, 65, 20),
-(11, 'Black Market Ship', 5000, 1500, 80, 60, 26);
+(11, 'Black Market Ship', 5000, 1500, 80, 60, 12);
 
 
 -- Insert into Equipage table
