@@ -1,6 +1,6 @@
-SELECT id_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Nombre de personne dans une entreprise
+SELECT id_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Combien compte t-on d’employés pour chaque entreprise?
 
-SELECT * FROM Vaisseau WHERE id_vaisseau NOT IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- tout les vaisseau qui n'ont pas d'équipages
+SELECT * FROM Vaisseau WHERE id_vaisseau NOT IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- Quels sont les vaisseaux n’ayant pas d'équipage ?
 
 
 
@@ -21,7 +21,7 @@ AND NOT EXISTS (
     AND MO2.statut = 'LEGAL'
 );
 
---les vaisseaux qui ont un prix > à la moyenne des prix de tout les vaisseaux
+--Quels sont les vaisseaux ayant un prix supérieur à la moyenne des prix des autres vaisseaux?
 SELECT *
 FROM Vaisseau
 WHERE prix > (
@@ -29,7 +29,7 @@ WHERE prix > (
     FROM Vaisseau
 );
 
--- tout les vaisseaux qui n'ont  que des objets illégal dans leur inventaire 
+-- Quels sont les vaisseaux qui ne possèdent que des objets illégaux dans leur inventaire?
 SELECT id_vaisseau, nom
 FROM Vaisseau
 WHERE id_vaisseau NOT IN (
@@ -48,7 +48,7 @@ WHERE id_vaisseau NOT IN (
 
 
 
---entreprises dont le nombre d'objets vendus est supérieur à la moyenne du nombre d'objets vendus par les autres entreprises
+--Quelles sont les entreprises dont le nombre de gammes d'objets proposés à la vente dépasse la moyenne du nombre de gammes d'objets proposés à la vente par les autres entreprises ?
 SELECT id_entreprise, nom_entreprise
 FROM Entreprise E1
 WHERE (
