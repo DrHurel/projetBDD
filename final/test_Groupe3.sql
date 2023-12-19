@@ -152,7 +152,6 @@ select NombreObjetsIllegauxEntreprise(22);
 --test fonction NombreObjetsIllegauxEntreprise, entreprise sans objets illégaux
 select NombreObjetsIllegauxEntreprise(21);
 
-SELECT calculer_prix_total_objets_entreprise(24);
 
 --test procedure afficher_informations_equipage_de_tous_les_vaisseaux
 call afficher_informations_equipage_de_tous_les_vaisseaux();
@@ -173,4 +172,8 @@ call TransfertVaisseau(42942,75,76,'2023-12-19');
 select * 
 from Historique_Vente_Vaisseau
 where id_vaisseau = 42942 AND id_entreprise=75 AND id_proprietaire=76 AND date_vente='2023-12-19';
+
+
+--test procedure ecrat type
+SELECT ecart_type_age_entreprise(11);
 
