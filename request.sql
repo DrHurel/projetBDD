@@ -27,7 +27,7 @@ AND NOT EXISTS (
     AND MO2.statut = 'LEGAL'
 );
 
-
+--les vaisseaux qui ont un prix > à la moyenne des prix de tout les vaisseaux
 SELECT *
 FROM Vaisseau
 WHERE prix > (
@@ -35,4 +35,34 @@ WHERE prix > (
     FROM Vaisseau
 );
 
+-- tout les vaisseaux qui n'ont  que des objets illégal dans leur inventaire 
+SELECT id_vaisseau, nom
+FROM Vaisseau
+WHERE id_vaisseau IN (
+    SELECT id_vaisseau
+    FROM Inventaire_Vaisseau
+    GROUP BY id_vaisseau
+    HAVING COUNT(DISTINCT id_objet) = (
+        SELECT COUNT(DISTINCT id_objet)
+        FROM Modele_Objet
+        WHERE statut = 'ILLEGAL'
+    )
+);
+
+
+--entreprises dont le nombre d'objets vendus est supérieur à la moyenne du nombre d'objets vendus par les autres entreprises
+SELECT id_entreprise, nom_entreprise
+FROM Entreprise E1
+WHERE (
+    SELECT COUNT(*)
+    FROM Gamme_Vente_Objet GVO
+    WHERE GVO.id_fabriquant = E1.id_entreprise
+) > (
+    SELECT AVG(nombre_objets)
+    FROM (
+        SELECT COUNT(*) AS nombre_objets
+        FROM Gamme_Vente_Objet
+        GROUP BY id_fabriquant
+    ) AS subquery
+);
 
