@@ -5,14 +5,14 @@ DECLARE
     equipage_id INT;
     personne_info RECORD;
 BEGIN
-    -- Obtenir l'identifiant de l'équipage associé au vaisseau donné
+
     SELECT id_equipage INTO equipage_id
     FROM Equipage
     WHERE id_vaisseau = vaisseau_id;
 
-    -- Vérifier si un équipage est associé à ce vaisseau
+    
     IF equipage_id IS NOT NULL THEN
-        -- Afficher les informations des membres de l'équipage sous forme de tableau
+    
         RAISE NOTICE '+----------------------------Equipage---------------------------------+';
         RAISE NOTICE '+------+-------------+----------+-----------+------+------------------+';
         RAISE NOTICE '| ID   | Nom         | Prénom   | Poste     | Âge  | Date de naissance|';
@@ -107,6 +107,8 @@ $$;
 
 
 --Procédure pour transférer un vaisseau d'une entreprise à une autre avec mise à jour de l'historique :
+
+
 CREATE OR REPLACE PROCEDURE TransfertVaisseau (IN vaisseau_idD INT,IN source_id INT,IN destination_id INT,IN date_transfer DATE)
 LANGUAGE plpgsql
 AS $$
