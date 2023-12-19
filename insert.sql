@@ -62,7 +62,7 @@ INSERT INTO Entreprise_Vaisseau (id_entreprise, categorie) VALUES
 
 -- Insert into Entreprise_Objet table
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
-    (21), (22), (23), (24), (25);
+    (21), (22), (23), (24), (25) , (26);
 
 
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
