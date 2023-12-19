@@ -146,3 +146,29 @@ BEGIN
     RETURN prix_total;
 END;
 $$;
+
+
+CREATE OR REPLACE FUNCTION ecart_type_age_entreprise(IN entreprise_id INT)
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    age_employer INT;
+    count INT := 0;
+    mean_age INT;
+    sum INT := 0;
+BEGIN
+    SELECT AVG(age) INTO mean_age FROM Personne WHERE id_entreprise= entreprise_id GROUP BY id_entreprise;
+
+    FOR age_employer IN 
+        SELECT age  FROM Personne WHERE id_entreprise= entreprise_id
+    LOOP
+        count := count+1;
+        sum := sum + (mean_age - age_employer)*(mean_age - age_employer);
+
+    END LOOP;
+
+    RETURN SQRT(sum/count);
+    
+END;
+$$;
