@@ -29,7 +29,6 @@ BEGIN
 
     masse_inventaire := total_masse_inventaire;
     --l'unité de la masse des objets étant en g et la masse des vaisseaux étant en Kg , nous devons multiplier par 1000
-    --attention la masse des vaisseaux est en kg alors que les objets sont en g
     IF ((masse_inventaire + (NEW.quantite * masse_objet)) >= (masse_vaisseau / 2) * 1000) THEN
         RAISE NOTICE 'masse inventaire overcharge';
     END IF;
