@@ -417,19 +417,25 @@ $$;
 --Procédure pour transférer un vaisseau d'une entreprise à une autre avec mise à jour de l'historique :
 
 
-CREATE OR REPLACE PROCEDURE TransfertVaisseau (IN vaisseau_idD INT,IN source_id INT,IN destination_id INT,IN date_transfer DATE)
+CREATE OR REPLACE PROCEDURE TransfertVaisseau(IN vaisseau_idD INT,IN source_id INT,IN destination_id INT,IN date_transfer DATE)
 LANGUAGE plpgsql
 AS $$
+DECLARE
+    checkIfProprio RECORD;
 BEGIN
-    UPDATE Historique_Proprio
-    SET date_fin = date_transfer
-    WHERE id_vaisseau = vaisseau_idD AND date_fin IS NULL;
-
-    INSERT INTO Historique_Vente_Vaisseau (id_vaisseau, id_entreprise, id_proprietaire, date_vente)
-    VALUES (vaisseau_idD, source_id,destination_id, date_transfer);
+   
+    SELECT * INTO checkIfProprio FROM Historique_Proprio WHERE id_vaisseau=vaisseau_idD AND id_proprietaire=source_id AND date_fin IS NULL;
+    IF checkIfProprio IS NULL THEN
+        RAISE EXCEPTION 'no such ships owned %',now();
+    ELSE 
+        UPDATE Historique_Proprio SET date_fin = date_transfer WHERE id_vaisseau = vaisseau_idD AND date_fin IS NULL;
+        INSERT 
+        INTO 
+        Historique_Proprio (id_vaisseau, id_proprietaire, date_debut) 
+        VALUES (vaisseau_idD, destination_id, date_transfer);
+    END IF;
 END;
 $$;
-
 
 CREATE OR REPLACE FUNCTION calculer_prix_total_objets_entreprise(IN entreprise_idD INT)
 RETURNS INT
@@ -555,7 +561,7 @@ INSERT INTO Entreprise_Objet (id_entreprise) VALUES
 
 -- Insert into Entreprise_Objet table
 INSERT INTO Entreprise_Objet (id_entreprise,categorie) VALUES
-    (27,"PNJ"), (28,"PNJ"), (29,"JOUEUR"), (30,"PNJ");
+    (27,'PNJ'), (28,'PNJ'), (29,'JOUEUR'), (30,'PNJ');
 
 
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
