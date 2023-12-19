@@ -3,23 +3,14 @@ SELECT id_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entr
 SELECT * FROM Vaisseau WHERE id_vaisseau NOT IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- Quels sont les vaisseaux n’ayant pas d'équipage ?
 
 
+SELECT e.id_equipage,e.nom AS nom_equipage,AVG(EXTRACT(YEAR FROM age(p.date_naissance))) AS moyenne_age -- quelle est la moyenne d'âge des membres de chaque équipage?
+FROM Equipage e
+JOIN Personne p ON e.id_equipage = p.id_equipage
+GROUP BY e.id_equipage, e.nom
+ORDER BY moyenne_age DESC;
 
 
 
-
--- trouver les entreprises qui vendent uniquement des objets illégaux
-SELECT DISTINCT E.id_entreprise, E.nom_entreprise
-FROM Entreprise E
-LEFT JOIN Gamme_Vente_Objet GVO ON E.id_entreprise = GVO.id_fabriquant
-LEFT JOIN Modele_Objet MO ON GVO.id_objet = MO.id_objet
-WHERE MO.statut = 'ILLEGAL'
-AND NOT EXISTS (
-    SELECT 1
-    FROM Gamme_Vente_Objet GVO2
-    LEFT JOIN Modele_Objet MO2 ON GVO2.id_objet = MO2.id_objet
-    WHERE E.id_entreprise = GVO2.id_fabriquant
-    AND MO2.statut = 'LEGAL'
-);
 
 --Quels sont les vaisseaux ayant un prix supérieur à la moyenne des prix des autres vaisseaux?
 SELECT *
