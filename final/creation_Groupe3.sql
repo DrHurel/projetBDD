@@ -437,21 +437,30 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION calculer_prix_total_objets_entreprise(IN entreprise_idD INT)
+
+
+CREATE OR REPLACE FUNCTION ecart_type_age_entreprise(IN entreprise_id INT)
 RETURNS INT
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    prix_total INTEGER := 0;
+    age_employer INT;
+    count INT := 0;
+    mean_age INT;
+    sum INT := 0;
 BEGIN
-    SELECT COALESCE(SUM(mo.prix), 0)
-    INTO prix_total
-    FROM Entreprise_Objet eo 
-    JOIN Gamme_Vente_Objet gvo on eo.id_entreprise = gvo.id_fabriquant
-    JOIN Modele_Objet mo ON gvo.id_objet = mo.id_objet
-    WHERE eo.id_entreprise = entreprise_idD;
+    SELECT AVG(age) INTO mean_age FROM Personne WHERE id_entreprise= entreprise_id GROUP BY id_entreprise;
 
-    RETURN prix_total;
+    FOR age_employer IN 
+        SELECT age  FROM Personne WHERE id_entreprise= entreprise_id
+    LOOP
+        count := count+1;
+        sum := sum + (mean_age - age_employer)*(mean_age - age_employer);
+
+    END LOOP;
+
+    RETURN SQRT(sum/count);
+    
 END;
 $$;
 
@@ -760,3 +769,9 @@ WHERE (
     ) AS subquery
 );
 
+-- la somme des prix des objets vendu part une entreprise objet
+SELECT COALESCE(SUM(mo.prix), 0) 
+    FROM Entreprise_Objet eo 
+    JOIN Gamme_Vente_Objet gvo on eo.id_entreprise = gvo.id_fabriquant
+    JOIN Modele_Objet mo ON gvo.id_objet = mo.id_objet
+    WHERE eo.id_entreprise = entreprise_idD;
