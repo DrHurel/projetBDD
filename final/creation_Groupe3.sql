@@ -563,7 +563,7 @@ INSERT INTO Entreprise_Objet (id_entreprise) VALUES
 
 -- Insert into Entreprise_Objet table
 INSERT INTO Entreprise_Objet (id_entreprise,categorie) VALUES
-    (27,"PNJ"), (28,"PNJ"), (29,"JOUEUR"), (30,"PNJ");
+    (27,'PNJ'), (28,'PNJ'), (29,'JOUEUR'), (30,'PNJ');
 
 
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
