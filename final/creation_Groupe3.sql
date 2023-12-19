@@ -157,7 +157,7 @@ BEGIN
     masse_inventaire := total_masse_inventaire;
     --l'unité de la masse des objets étant en g et la masse des vaisseaux étant en Kg , nous devons multiplier par 1000
     IF ((masse_inventaire + (NEW.quantite * masse_objet)) >= (masse_vaisseau / 2) * 1000) THEN
-        RAISE NOTICE 'masse inventaire overcharge';
+        RAISE EXCEPTION 'masse inventaire overcharge';
     END IF;
 
     RETURN NEW;
@@ -354,7 +354,6 @@ BEGIN
     END IF;
 END;
 $$;
-
 CREATE OR REPLACE PROCEDURE afficher_informations_equipage_de_tous_les_vaisseaux()
 LANGUAGE plpgsql
 AS $$
@@ -369,11 +368,10 @@ BEGIN
         SELECT TRUE INTO equipage_bool 
         FROM equipage 
         WHERE id_vaisseau=vaisseaux_info.id_vaisseau;
-
+        RAISE NOTICE '+----------------------------Vaisseau---------------------------------+';
+        RAISE NOTICE '+--------------------------%-----------------------------+',
+            lpad(vaisseaux_info.nom, 14, ' ');
         IF equipage_bool THEN
-            RAISE NOTICE '+----------------------------Vaisseau---------------------------------+';
-            RAISE NOTICE '+--------------------------%-----------------------------+',
-                lpad(vaisseaux_info.nom, 10, ' ');
             RAISE NOTICE '+------+-------------+----------+-----------+---------+---------------+';
             RAISE NOTICE '| ID   | Prix        | Masse    | Longueur  | Largeur | ID_fabriquant |';
             RAISE NOTICE '+------+-------------+----------+-----------+---------+---------------+';
@@ -386,7 +384,7 @@ BEGIN
                 lpad(vaisseaux_info.id_fabriquant::text, 12, ' ');
             CALL afficher_informations_equipage(vaisseaux_info.id_vaisseau);
         ELSE
-            RAISE NOTICE '|Aucun équipage pour ce vaisseau|';
+            RAISE NOTICE '|                  Aucun équipage pour ce vaisseau                   |';
         END IF;
     END LOOP;
     RAISE NOTICE '+------+-------------+----------+-----------+--------+----------------+';
