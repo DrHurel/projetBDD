@@ -75,7 +75,8 @@ INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabri
 (7, 'Herald', 2500, 1100, 60, 50, 17),
 (8, 'Freelancer MAX', 2800, 1200, 65, 55, 18),
 (9, 'Reclaimer', 3000, 1300, 70, 60, 19),
-(10, 'Pioneer', 3500, 1400, 75, 65, 20);
+(10, 'Pioneer', 3500, 1400, 75, 65, 20),
+(11, 'Black Market Ship', 5000, 1500, 80, 60, 26);
 
 
 -- Insert into Equipage table
@@ -160,7 +161,13 @@ INSERT INTO Inventaire_Vaisseau (id_vaisseau, id_objet, quantite) VALUES
 (7, 7, 110),
 (8, 8, 100),
 (9, 9, 130),
-(10, 10, 95);
+(10, 10, 95),
+(11, 2, 100),  
+(11, 4, 80),   
+(11, 6, 150), 
+(11, 8, 100), 
+(11, 10, 95);  
+
 
 -- Insert into Historique_Proprio table
 INSERT INTO Historique_Proprio (id_vaisseau, id_proprietaire, date_debut, date_fin) VALUES
