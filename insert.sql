@@ -48,7 +48,8 @@ INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
     (22, 'Hurston Dynamics', '2023-12-20'),
     (23, 'Snappy Food', '2023-12-20'),
     (24, 'ArcCorp', '2024-01-25'),
-    (25, 'Aopoa', '2024-03-10');
+    (25, 'Aopoa', '2024-03-10'),
+    (26, 'IllegalCorp','2024-08-11');
 
 
 
@@ -140,7 +141,12 @@ INSERT INTO Gamme_Vente_Objet (id_fabriquant, id_objet) VALUES
 (23, 2),
 (24, 4),
 (24, 1),
-(25, 5);
+(25, 5),
+(26, 2),
+(26, 4), 
+(26, 6), 
+(26, 8),
+(26, 10);
 
 
 -- Insert into Inventaire_Vaisseau table
