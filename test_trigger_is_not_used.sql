@@ -1,3 +1,4 @@
+-- TEST FILE SHOULD NOT BE USED IN PROD DATABASE
 
 -- MIN DATABASE TABLES REQUIRE
 
@@ -116,6 +117,40 @@ INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance) VALUES
     (1, 'Smith', 'John', 'Engineer', '1993-05-20');
 
 
+SELECT * FROM Personne;
+SELECT * FROM Entreprise;
+SELECT * FROM Proprietaire;
+
+DELETE FROM Proprietaire WHERE id_proprietaire=1;
+
+SELECT * FROM Personne;
+SELECT * FROM Entreprise;
+SELECT * FROM Proprietaire;
+END;
+
+
+-- TEST INSERT cas -> Même id pour les 2 inserts mais ordre inverse
+BEGIN;
+
+INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance) VALUES
+    (1, 'Smith', 'John', 'Engineer', '1993-05-20');
+
+INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
+    (1, 'Aegis Dynamics', '2023-01-01');
+SELECT * FROM Personne;
+SELECT * FROM Entreprise;
+SELECT * FROM Proprietaire;
+DELETE FROM Proprietaire WHERE id_proprietaire=1;
+SELECT * FROM Personne;
+SELECT * FROM Entreprise;
+SELECT * FROM Proprietaire;
+END;
+
+-- TEST INSERT cas -> insert with existing id
+BEGIN;
+INSERT INTO Proprietaire (id_proprietaire) VALUES (1);
+INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance) VALUES
+    (1, 'Smith', 'John', 'Engineer', '1993-05-20');
 SELECT * FROM Personne;
 SELECT * FROM Entreprise;
 SELECT * FROM Proprietaire;
