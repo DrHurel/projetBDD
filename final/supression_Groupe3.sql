@@ -1,4 +1,4 @@
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Historique_Vente_Vaisseau';
@@ -8,7 +8,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Historique_Proprio';
@@ -18,7 +18,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Inventaire_Vaisseau';
@@ -28,7 +28,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Gamme_Vente_Objet';
@@ -38,7 +38,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Chef_Entreprise';
@@ -48,7 +48,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Personne';
@@ -58,7 +58,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Equipage';
@@ -68,7 +68,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Vaisseau';
@@ -78,7 +78,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Entreprise_Objet';
@@ -88,7 +88,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Entreprise_Vaisseau';
@@ -98,7 +98,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Entreprise';
@@ -108,7 +108,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Modele_Objet';
@@ -118,7 +118,7 @@ BEGIN
     END;
 END $$;
 
-DO $$ 
+DO $$
 BEGIN
     BEGIN
         EXECUTE 'DROP TABLE Proprietaire';
@@ -127,3 +127,4 @@ BEGIN
             RAISE NOTICE 'Table Proprietaire does not exist';
     END;
 END $$;
+
