@@ -61,7 +61,7 @@ CREATE TABLE Personne(
     id_personne INT,
     nom VARCHAR(50) NOT NULL,
     prenom VARCHAR(50) NOT NULL,
-    poste VARCHAR(15) NOT NULL,
+    poste VARCHAR(15),
     age INT,
     date_naissance DATE NOT NULL,
     id_entreprise INT,
