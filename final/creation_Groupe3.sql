@@ -767,4 +767,4 @@ SELECT COALESCE(SUM(mo.prix), 0)
     FROM Entreprise_Objet eo 
     JOIN Gamme_Vente_Objet gvo on eo.id_entreprise = gvo.id_fabriquant
     JOIN Modele_Objet mo ON gvo.id_objet = mo.id_objet
-    WHERE eo.id_entreprise = entreprise_idD;
+    WHERE eo.id_entreprise = 22;
