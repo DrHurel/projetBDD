@@ -1,4 +1,4 @@
-SELECT id_entreprise,Count(*) FROM Personne GROUP BY id_entreprise; -- Nombre de personne dans une entreprise
+SELECT id_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Nombre de personne dans une entreprise
 
 SELECT * FROM Vaisseau WHERE id_vaisseau IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- tout les vaisseau qui on un équipage
 
