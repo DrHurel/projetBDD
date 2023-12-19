@@ -38,16 +38,20 @@ WHERE prix > (
 -- tout les vaisseaux qui n'ont  que des objets illégal dans leur inventaire 
 SELECT id_vaisseau, nom
 FROM Vaisseau
-WHERE id_vaisseau IN (
+WHERE id_vaisseau NOT IN (
     SELECT id_vaisseau
     FROM Inventaire_Vaisseau
     GROUP BY id_vaisseau
-    HAVING COUNT(DISTINCT id_objet) = (
-        SELECT COUNT(DISTINCT id_objet)
-        FROM Modele_Objet
-        WHERE statut = 'ILLEGAL'
+    HAVING COUNT(*) > 0
+    AND COUNT(*) = (
+        SELECT COUNT(*)
+        FROM Inventaire_Vaisseau iv
+        JOIN Modele_Objet mo ON iv.id_objet = mo.id_objet
+        WHERE mo.statut = 'LEGAL'
+        AND iv.id_vaisseau = Vaisseau.id_vaisseau
     )
 );
+
 
 
 --entreprises dont le nombre d'objets vendus est supérieur à la moyenne du nombre d'objets vendus par les autres entreprises
