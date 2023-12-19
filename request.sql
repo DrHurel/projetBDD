@@ -27,3 +27,12 @@ AND NOT EXISTS (
     AND MO2.statut = 'LEGAL'
 );
 
+
+SELECT *
+FROM Vaisseau
+WHERE prix > (
+    SELECT AVG(prix)
+    FROM Vaisseau
+);
+
+
