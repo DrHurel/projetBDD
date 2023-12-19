@@ -437,21 +437,30 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION calculer_prix_total_objets_entreprise(IN entreprise_idD INT)
+
+
+CREATE OR REPLACE FUNCTION ecart_type_age_entreprise(IN entreprise_id INT)
 RETURNS INT
 LANGUAGE plpgsql
 AS $$
 DECLARE
-    prix_total INTEGER := 0;
+    age_employer INT;
+    count INT := 0;
+    mean_age INT;
+    sum INT := 0;
 BEGIN
-    SELECT COALESCE(SUM(mo.prix), 0)
-    INTO prix_total
-    FROM Entreprise_Objet eo 
-    JOIN Gamme_Vente_Objet gvo on eo.id_entreprise = gvo.id_fabriquant
-    JOIN Modele_Objet mo ON gvo.id_objet = mo.id_objet
-    WHERE eo.id_entreprise = entreprise_idD;
+    SELECT AVG(age) INTO mean_age FROM Personne WHERE id_entreprise= entreprise_id GROUP BY id_entreprise;
 
-    RETURN prix_total;
+    FOR age_employer IN 
+        SELECT age  FROM Personne WHERE id_entreprise= entreprise_id
+    LOOP
+        count := count+1;
+        sum := sum + (mean_age - age_employer)*(mean_age - age_employer);
+
+    END LOOP;
+
+    RETURN SQRT(sum/count);
+    
 END;
 $$;
 
@@ -694,30 +703,23 @@ INSERT INTO Historique_Vente_Vaisseau (id_vaisseau, id_entreprise, id_proprietai
     (9, 11, 19, '2023-09-15'),
     (10, 18, 20, '2023-10-20');
 
-SELECT id_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Nombre de personne dans une entreprise
-
-SELECT * FROM Vaisseau WHERE id_vaisseau NOT IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- tout les vaisseau qui n'ont pas d'équipages
-
-
-
 
 -- REQUEST
+SELECT id_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Combien compte t-on d’employés pour chaque entreprise?
 
--- trouver les entreprises qui vendent uniquement des objets illégaux
-SELECT DISTINCT E.id_entreprise, E.nom_entreprise
-FROM Entreprise E
-LEFT JOIN Gamme_Vente_Objet GVO ON E.id_entreprise = GVO.id_fabriquant
-LEFT JOIN Modele_Objet MO ON GVO.id_objet = MO.id_objet
-WHERE MO.statut = 'ILLEGAL'
-AND NOT EXISTS (
-    SELECT 1
-    FROM Gamme_Vente_Objet GVO2
-    LEFT JOIN Modele_Objet MO2 ON GVO2.id_objet = MO2.id_objet
-    WHERE E.id_entreprise = GVO2.id_fabriquant
-    AND MO2.statut = 'LEGAL'
-);
+SELECT * FROM Vaisseau WHERE id_vaisseau NOT IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- Quels sont les vaisseaux n’ayant pas d'équipage ?
 
---les vaisseaux qui ont un prix > à la moyenne des prix de tout les vaisseaux
+
+SELECT e.id_equipage,e.nom AS nom_equipage,AVG(EXTRACT(YEAR FROM age(p.date_naissance))) AS moyenne_age -- quelle est la moyenne d'âge des membres de chaque équipage?
+FROM Equipage e
+JOIN Personne p ON e.id_equipage = p.id_equipage
+GROUP BY e.id_equipage, e.nom
+ORDER BY moyenne_age DESC;
+
+
+
+
+--Quels sont les vaisseaux ayant un prix supérieur à la moyenne des prix des autres vaisseaux?
 SELECT *
 FROM Vaisseau
 WHERE prix > (
@@ -725,7 +727,7 @@ WHERE prix > (
     FROM Vaisseau
 );
 
--- tout les vaisseaux qui n'ont  que des objets illégal dans leur inventaire 
+-- Quels sont les vaisseaux qui ne possèdent que des objets illégaux dans leur inventaire?
 SELECT id_vaisseau, nom
 FROM Vaisseau
 WHERE id_vaisseau NOT IN (
@@ -744,7 +746,7 @@ WHERE id_vaisseau NOT IN (
 
 
 
---entreprises dont le nombre d'objets vendus est supérieur à la moyenne du nombre d'objets vendus par les autres entreprises
+--Quelles sont les entreprises dont le nombre de gammes d'objets proposés à la vente dépasse la moyenne du nombre de gammes d'objets proposés à la vente par les autres entreprises ?
 SELECT id_entreprise, nom_entreprise
 FROM Entreprise E1
 WHERE (
@@ -757,6 +759,12 @@ WHERE (
         SELECT COUNT(*) AS nombre_objets
         FROM Gamme_Vente_Objet
         GROUP BY id_fabriquant
-    ) AS subquery
+    )
 );
 
+-- la somme des prix des objets vendu part une entreprise objet
+SELECT COALESCE(SUM(mo.prix), 0) 
+    FROM Entreprise_Objet eo 
+    JOIN Gamme_Vente_Objet gvo on eo.id_entreprise = gvo.id_fabriquant
+    JOIN Modele_Objet mo ON gvo.id_objet = mo.id_objet
+    WHERE eo.id_entreprise = 22;
