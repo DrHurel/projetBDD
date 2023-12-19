@@ -461,10 +461,10 @@ BEGIN
 
     IF count=0 THEN 
         RAISE NOTICE 'pas d employé dans cette entreprise';
-    END IF;
-
-    RETURN SQRT(sum/count);
     
+    ELSE
+        RETURN SQRT(sum/count);
+    END IF;
 END;
 $$;
 
