@@ -89,9 +89,34 @@ EXECUTE FUNCTION is_not_used_by_Entreprise();
 
 BEGIN TRANSACTION;
 
-INSERT INTO Entreprise_Vaisseau (id_entreprise, categorie) VALUES
-    (11,'Combat'), (12,'Transport'), (13,'Exploration'), (14,'Industrial'), (15,'Support'), (16,'Competition'), (17,'Ground'), (18,'Multi'), (19,'Exploration'), (20,'Transport');
+INSERT INTO Equipage (id_equipage) VALUES
+    (1 ),
+    (2 ),
+    (3),
+    (4),
+    (5),
+    (6),
+    (7),
+    (8),
+    (9),
+    (10);
 
+INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
+    (11, 'Aegis Dynamics', '2023-01-01'),
+    (12, 'Anvil Aerospace', '2023-02-15'),
+    (13, 'Origin Jumpworks', '2023-03-10'),
+    (14, 'Consolidated Outland', '2023-04-20'),
+    (15, 'Drake Interplanetary', '2023-05-05'),
+    (16, 'Esperia', '2023-06-30'),
+    (17, 'RSI (Roberts Space Industries)', '2023-07-18'),
+    (18, 'MISC (Musashi Industrial & Starflight Concern)', '2023-08-25'),
+    (19, 'Crusader Industries', '2023-09-08'),
+    (20, 'Argo Astronautics', '2023-10-12'),
+    (21, 'MicroTech', '2023-11-15'),
+    (22, 'Hurston Dynamics', '2023-12-20'),
+    (23, 'Snappy Food', '2023-12-20'),
+    (24, 'ArcCorp', '2024-01-25'),
+    (25, 'Aopoa', '2024-03-10');
 
 INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entreprise, id_equipage) VALUES
     (1, 'Smith', 'John', 'Engineer', '1993-05-20', 11, 1);
