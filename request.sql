@@ -61,6 +61,6 @@ WHERE (
         SELECT COUNT(*) AS nombre_objets
         FROM Gamme_Vente_Objet
         GROUP BY id_fabriquant
-    ) AS subquery
+    )
 );
 
