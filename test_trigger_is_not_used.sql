@@ -95,10 +95,34 @@ INSERT INTO Equipage (id_equipage) VALUES (1);
 INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
     (11, 'Aegis Dynamics', '2023-01-01');
 
-INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entreprise, id_equipage) VALUES
-    (1, 'Smith', 'John', 'Engineer', '1993-05-20', 11, 1);
+INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_equipage) VALUES
+    (1, 'Smith', 'John', 'Engineer', '1993-05-20', 1);
 
 SELECT * FROM Personne;
 SELECT * FROM Entreprise;
 SELECT * FROM Proprietaire;
 ROLLBACK;
+
+
+
+
+-- TEST INSERT cas -> Même id pour les 2 inserts
+BEGIN;
+
+INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
+    (1, 'Aegis Dynamics', '2023-01-01');
+
+INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance) VALUES
+    (1, 'Smith', 'John', 'Engineer', '1993-05-20');
+
+
+SELECT * FROM Personne;
+SELECT * FROM Entreprise;
+SELECT * FROM Proprietaire;
+
+DELETE FROM Proprietaire WHERE id_proprietaire=1;
+
+SELECT * FROM Personne;
+SELECT * FROM Entreprise;
+SELECT * FROM Proprietaire;
+END;
