@@ -537,8 +537,11 @@ INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
     (23, 'Snappy Food', '2023-12-20'),
     (24, 'ArcCorp', '2024-01-25'),
     (25, 'Aopoa', '2024-03-10'),
-    (26, 'IllegalCorp','2024-08-11');
-
+    (26, 'IllegalCorp','2024-08-11'),
+    (27, 'CNOU (Consolidated Navy of United)', '2024-09-05'),
+    (28, 'Banu Souli', '2024-10-18'),
+    (29, 'Tumbril Land Systems', '2024-11-30'),
+    (30, 'Xi An Aerospace', '2024-12-15');
 
 
 

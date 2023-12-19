@@ -1,7 +1,7 @@
 --test trigger age chef entreprise
 
 INSERT INTO Proprietaire (id_proprietaire)
-VALUES (100020), (100021);
+VALUES (120), (121);
 
 
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant)
@@ -22,26 +22,26 @@ VALUES (6600,
 
 
 INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation)
-VALUES (100021,
+VALUES (121,
         'pas legale',
         '2023-12-24');
 
 
 INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entreprise, id_equipage)
-VALUES (100020,
+VALUES (120,
         'Duban',
         'Mathis',
         'Ecolier',
         '2023-05-20',
-        100021,
+        121,
         6600);
 
 
 INSERT INTO Chef_Entreprise (date_debut, date_fin,id_personne,id_entreprise)
 VALUES ('2023-08-01',
         NULL,
-        100020,
-        100021);
+        120,
+        121);
 
 --test trigger masse inventaire vaisseau qui passe car moins de la moitier de la masse
 
@@ -111,13 +111,13 @@ VALUES (110,
 -- Test trigger is_not_used_by_entreprise qui passe pas car utilisé par une entreprise
 
 INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation)
-VALUES (1200,
+VALUES (150,
         'Aegis Dynamics',
         '2023-01-01');
 
 
 INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance)
-VALUES (1200,
+VALUES (150,
         'Smith',
         'John',
         'Engineer',
@@ -125,14 +125,31 @@ VALUES (1200,
 
 -- Test trigger is_not_used_by_personne qui passe pas car utilisé par une personne
 INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance) VALUES
-    (1000, 'Smith', 'John', 'Engineer', '1993-05-20');
+    (111, 'Smith', 'John', 'Engineer', '1993-05-20');
 
 INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
-    (1000, 'Aegis Dynamics', '2023-01-01');
+    (111, 'Aegis Dynamics', '2023-01-01');
 
 
 -- test trigger update_age insert sans age
-INSERT INTO Personne(id_personne,nom,prenom,date_naissance) VALUES  (121, 'Smith', 'Howard','1993-05-20');
+INSERT INTO Personne(id_personne,nom,prenom,date_naissance) VALUES  (131, 'Smith', 'Howard','1993-05-20');
 
 -- test trigger update_age insert avec age incorrect
-INSERT INTO Personne(id_personne,nom,prenom,age,date_naissance) VALUES  (122, 'Smith', 'Ethan',1120,'1993-05-20');
+INSERT INTO Personne(id_personne,nom,prenom,age,date_naissance) VALUES  (104, 'Smith', 'Ethan',1120,'1993-05-20');
+
+
+-- TEST FONCTION
+
+
+SELECT listFreeId();
+
+CALL afficher_informations_equipage(1);
+CALL afficher_informations_equipage(100);
+
+SELECT NombreObjetsIllegauxEntreprise(26);
+SELECT NombreObjetsIllegauxEntreprise(100);
+SELECT NombreObjetsIllegauxEntreprise(400);
+
+CALL TransfertVaisseau(1,2,3,'2001-05-20');
+
+SELECT calculer_prix_total_objets_entreprise(24);
