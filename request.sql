@@ -9,3 +9,21 @@ IN (
     WHERE EXISTS (
         SELECT * FROM Gamme_Vente_Objet AS gvo JOIN Modele_Objet AS mo ON gvo.id_objet=mo.id_objet
         WHERE eo.id_entreprise = gvo.id_fabriquant AND mo.statut='ILLEGAL')); -- tout les entreprise objet qui vendent des choses illégal 
+
+
+
+
+-- trouver les entreprises qui vendent uniquement des objets illégaux
+SELECT DISTINCT E.id_entreprise, E.nom_entreprise
+FROM Entreprise E
+LEFT JOIN Gamme_Vente_Objet GVO ON E.id_entreprise = GVO.id_fabriquant
+LEFT JOIN Modele_Objet MO ON GVO.id_objet = MO.id_objet
+WHERE MO.statut = 'ILLEGAL'
+AND NOT EXISTS (
+    SELECT 1
+    FROM Gamme_Vente_Objet GVO2
+    LEFT JOIN Modele_Objet MO2 ON GVO2.id_objet = MO2.id_objet
+    WHERE E.id_entreprise = GVO2.id_fabriquant
+    AND MO2.statut = 'LEGAL'
+);
+
