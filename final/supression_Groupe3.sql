@@ -1,21 +1,9 @@
 DROP TRIGGER IF EXISTS trigger_vaisseau_check_masse_objet ON Inventaire_Vaisseau;
-
-
 DROP TRIGGER IF EXISTS trigger_check_chef_entreprise_majeur_insert ON Chef_Entreprise;
-
-
 DROP TRIGGER IF EXISTS trigger_update_age ON Personne;
-
-
 DROP TRIGGER IF EXISTS trigger_is_not_used_by_personne ON Entreprise;
-
-
 DROP TRIGGER IF EXISTS trigger_is_not_used_by_entreprise ON Personne;
-
-
 DROP TRIGGER IF EXISTS trigger_is_not_used_by_entreprise_objet ON Entreprise_Vaisseau;
-
-
 DROP TRIGGER IF EXISTS trigger_is_not_used_by_entreprise_vaisseau ON Entreprise_Objet;
 
 DO $$
@@ -148,39 +136,16 @@ BEGIN
     END;
 END $$;
 
-
 DROP FUNCTION IF EXISTS check_masse();
-
 DROP FUNCTION IF EXISTS check_chef_entreprise_majeur();
-
 DROP FUNCTION IF EXISTS update_age();
-
-
 DROP FUNCTION IF EXISTS is_not_used_by_personne();
-
-
 DROP FUNCTION IF EXISTS is_not_used_by_entreprise();
-
-
 DROP FUNCTION IF EXISTS is_not_used_by_entrepise_objet();
-
-
 DROP FUNCTION IF EXISTS is_not_used_by_entreprise_vaisseau();
-
-
 DROP PROCEDURE IF EXISTS afficher_informations_equipage(IN INT);
-
-
 DROP PROCEDURE IF EXISTS afficher_informations_equipage_de_tous_les_vaisseaux();
-
-
 DROP FUNCTION IF EXISTS NombreObjetsIllegauxEntreprise (IN INT);
-
-
 DROP PROCEDURE IF EXISTS TransfertVaisseau(IN INT, IN INT, IN INT, IN DATE);
-
-
-DROP FUNCTION IF EXISTS calculer_prix_total_objets_entreprise(IN INT);
-
-
 DROP FUNCTION IF EXISTS listFreeId();
+DROP FUNCTION IF EXISTS ecart_type_age_entreprise(IN INT);
