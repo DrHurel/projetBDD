@@ -306,7 +306,7 @@ BEFORE INSERT OR UPDATE ON Entreprise_Objet
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_entreprise_vaisseau();
 
--- FONCTION 
+-- FONCTION et méthode
 
 CREATE OR REPLACE PROCEDURE afficher_informations_equipage(IN vaisseau_id INT)
 LANGUAGE plpgsql
