@@ -18,3 +18,35 @@ INSERT INTO Inventaire_Vaisseau (id_vaisseau, id_objet, quantite) VALUES(42642, 
 --test trigger masse inventaire vaisseau qui passe pas car c'est la moitier pile de la masse
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES (42342, 'C1', 1000, 500, 30, 20, 14); --500 de masse kg
 INSERT INTO Inventaire_Vaisseau (id_vaisseau, id_objet, quantite) VALUES(42342, 13, 10000); --25 de masse g, donc 25 * 10 = 250 g, donc * 1000 = 250 kg
+
+
+
+--test procedure afficher_informations_equipage
+call afficher_informations_equipage(6);
+
+--test procedure afficher_informations_equipage_de_tous_les_vaisseaux
+call afficher_informations_equipage_de_tous_les_vaisseaux();
+
+--test fonction NombreObjetsIllegauxEntreprise, entreprise avec des objets illégaux
+select NombreObjetsIllegauxEntreprise(22);
+
+--test fonction NombreObjetsIllegauxEntreprise, entreprise sans objets illégaux
+select NombreObjetsIllegauxEntreprise(21);
+
+--test procedure TransfertVaisseau
+INSERT INTO Proprietaire (id_proprietaire) VALUES (100113),(100114);
+INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES (100113, 'torp cher','2023-04-12'),(100114, 'merci','2023-07-04');
+INSERT INTO Entreprise_Vaisseau (id_entreprise, specialite) VALUES (100113,'Combat'),(100114,'Industrial');
+INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES (42942, 'M2', 1000, 500, 30, 20, 100113);
+INSERT INTO Historique_Proprio (id_vaisseau, id_proprietaire, date_debut, date_fin) VALUES (42942, 100113, '2023-01-01', NULL);
+
+select * 
+from Historique_Vente_Vaisseau
+where id_vaisseau = 42942 AND id_entreprise=100113 AND id_proprietaire=100114 AND date_vente='2023-12-19';
+
+call TransfertVaisseau(42942,100113,100114,'2023-12-19');
+
+select * 
+from Historique_Vente_Vaisseau
+where id_vaisseau = 42942 AND id_entreprise=100113 AND id_proprietaire=100114 AND date_vente='2023-12-19';
+
