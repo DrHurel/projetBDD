@@ -31,6 +31,7 @@ CREATE TABLE Entreprise_Vaisseau(
 
 CREATE TABLE Entreprise_Objet(
     id_entreprise INT,
+    categorie VARCHAR(50),
     CONSTRAINT FK_Entreprise_Objet_id_entreprise FOREIGN KEY(id_entreprise) REFERENCES Entreprise(id_entreprise) ON DELETE CASCADE,
     CONSTRAINT PK_Entreprise_Objet PRIMARY KEY(id_entreprise)
 );
