@@ -552,6 +552,10 @@ INSERT INTO Entreprise_Vaisseau (id_entreprise, specialite) VALUES
 INSERT INTO Entreprise_Objet (id_entreprise) VALUES
     (21), (22), (23), (24), (25) , (26);
 
+-- Insert into Entreprise_Objet table
+INSERT INTO Entreprise_Objet (id_entreprise,categorie) VALUES
+    (27,"PNJ"), (28,"PNJ"), (29,"JOUEUR"), (30,"PNJ");
+
 
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
 (1, 'Constellation', 1000, 500, 30, 20, 11),
