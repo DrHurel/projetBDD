@@ -768,7 +768,10 @@ INSERT INTO Historique_Vente_Vaisseau (id_vaisseau, id_entreprise, id_proprietai
 
 
 -- REQUEST
-SELECT id_entreprise,nom_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Combien compte t-on d’employés pour chaque entreprise?
+SELECT p.id_entreprise, nom_entreprise,Count(*) as Nombre_Employes  
+FROM Personne p 
+JOIN Entreprise e on e.id_entreprise=p.id_entreprise
+GROUP BY p.id_entreprise, nom_entreprise; -- Combien compte t-on d’employés pour chaque entreprise?
 
 SELECT * FROM Vaisseau WHERE id_vaisseau NOT IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- Quels sont les vaisseaux n’ayant pas d'équipage ?
 
