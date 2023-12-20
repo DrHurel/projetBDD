@@ -438,18 +438,22 @@ LANGUAGE plpgsql
 AS $$
 DECLARE
     checkIfProprio RECORD;
+    ok BOOLEAN := TRUE;
 BEGIN
    
-    SELECT * INTO checkIfProprio FROM Historique_Proprio WHERE id_vaisseau=vaisseau_idD AND id_proprietaire=source_id AND date_fin IS NULL;
-    IF checkIfProprio IS NULL THEN
-        RAISE EXCEPTION 'no such ships owned';
-    ELSE 
-        UPDATE Historique_Proprio SET date_fin = date_transfer WHERE id_vaisseau = vaisseau_idD AND date_fin IS NULL;
-        INSERT 
-        INTO 
-        Historique_Proprio (id_vaisseau, id_proprietaire, date_debut) 
-        VALUES (vaisseau_idD, destination_id, date_transfer);
-    END IF;
+    FOR checkIfProprio IN SELECT * FROM Historique_Proprio WHERE id_vaisseau=vaisseau_idD AND id_proprietaire=source_id AND date_fin IS NULL
+    LOOP
+        IF ok THEN
+            UPDATE Historique_Proprio SET date_fin = date_transfer WHERE id_vaisseau = vaisseau_idD AND date_fin IS NULL;
+            INSERT 
+            INTO 
+            Historique_Proprio (id_vaisseau, id_proprietaire, date_debut) 
+            VALUES (vaisseau_idD, destination_id, date_transfer);
+            ok := FALSE;
+        ELSE
+            RETURN;
+        END IF;
+    END LOOP;
 END;
 $$;
 
