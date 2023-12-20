@@ -602,6 +602,8 @@ INSERT INTO Entreprise_Objet (id_entreprise,categorie) VALUES
     (27,'PNJ'), (28,'PNJ'), (29,'JOUEUR'), (30,'PNJ');
 
 
+
+-- Insert into Vaisseau table
 INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabriquant) VALUES
 (1, 'Constellation', 1000, 500, 30, 20, 11),
 (2, 'Sabre', 1200, 600, 35, 25, 12),
@@ -617,7 +619,6 @@ INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabri
 
 
 -- Insert into Equipage table
--- Equipage
 INSERT INTO Equipage (id_equipage, nom, date_creation, id_vaisseau) VALUES
     (1, 'Explorer Expedition Team', '2023-01-10', 1),
     (2, 'Starlight Recon Squadron', '2023-02-20', 2),
@@ -632,7 +633,6 @@ INSERT INTO Equipage (id_equipage, nom, date_creation, id_vaisseau) VALUES
 
 
 -- Insert into Personne table
--- Personne
 INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entreprise, id_equipage) VALUES
     (1, 'Smith', 'John', 'Engineer', '1993-05-20', 11, 1),
     (2, 'Johnson', 'Jane', 'Pilot', '1988-10-15', 12, 2),
@@ -656,9 +656,6 @@ INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entrep
     (48, 'Muller', 'Hans', 'Scientist', '1975-12-15', 15),
     (49, 'Sato', 'Yuki', 'Medic', '1996-07-28', 15),
     (50, 'Gupta', 'Raj', 'Chef', '1984-01-10', 16);
-
-
--- Insert into Vaisseau table
 
 
 -- Insert into Chef_Entreprise table

@@ -137,6 +137,24 @@ INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
     (111, 'Aegis Dynamics', '2023-01-01');
 
 
+-- TEST trigger is_not_used_by_entreprise_vaisseau
+
+INSERT INTO Entreprise_Vaisseau (id_entreprise,specialite)
+VALUES (150,'Combat');
+
+INSERT INTO Entreprise_Objet (id_entreprise)
+VALUES (150);
+
+
+-- TEST trigger is_not_used_by_entreprise_objet
+INSERT INTO Entreprise (id_entreprise, nom_entreprise, data_creation) VALUES
+    (151, 'La Farfouille', '2023-01-01');
+INSERT INTO Entreprise_Objet (id_entreprise)
+VALUES (151);
+INSERT INTO Entreprise_Vaisseau (id_entreprise,specialite)
+VALUES (151,'Combat');
+
+
 -- test trigger update_age insert sans age
 INSERT INTO Personne(id_personne,nom,prenom,date_naissance) VALUES  (131, 'Smith', 'Howard','1993-05-20');
 
@@ -177,7 +195,7 @@ call TransfertVaisseau(42942,75,76,'2023-12-19');
 
 select * 
 from Historique_Proprio
-where id_vaisseau = 42942 AND id_proprietaire=76;
+where id_vaisseau = 42942 AND (id_proprietaire=76 OR id_proprietaire=75);
 
 
 --test procedure ecrat type
