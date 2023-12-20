@@ -1,3 +1,9 @@
+/*
+Duban Mathis [ 2210226 ]
+Bernardon Vincent [ 22009116 ]
+Hurel Jérémy [ 21907809 ]
+*/
+
 CREATE TABLE Proprietaire (
     id_proprietaire INT,
     CONSTRAINT PK_Proprietaire_id_proprietaire PRIMARY KEY(id_proprietaire)

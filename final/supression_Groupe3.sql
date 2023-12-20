@@ -1,3 +1,10 @@
+/*
+Duban Mathis [ 2210226 ]
+Bernardon Vincent [ 22009116 ]
+Hurel Jérémy [ 21907809 ]
+*/
+
+
 DO $$
 BEGIN 
     BEGIN
