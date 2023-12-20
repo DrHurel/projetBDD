@@ -157,7 +157,9 @@ VALUES (151,'Combat');
 
 -- test trigger update_age insert sans age
 INSERT INTO Personne(id_personne,nom,prenom,date_naissance) VALUES  (131, 'Smith', 'Howard','1993-05-20');
-
+SELECT id_personne, age
+FROM Personne
+WHERE id_personne=131;
 -- test trigger update_age insert avec age incorrect
 INSERT INTO Personne(id_personne,nom,prenom,age,date_naissance) VALUES  (104, 'Smith', 'Ethan',1120,'1993-05-20');
 
