@@ -131,6 +131,8 @@ CREATE TABLE Historique_Vente_Vaisseau(
 
 -- TRIGGERS
 
+
+-- CHECK MASSE INVENTAIRE/2 < MASSE VAISSEAU
 CREATE OR REPLACE FUNCTION check_masse()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -170,12 +172,12 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Créer le déclencheur
 CREATE TRIGGER trigger_vaisseau_check_masse_objet
 AFTER INSERT OR UPDATE ON Inventaire_Vaisseau
 FOR EACH ROW
 EXECUTE FUNCTION check_masse();
 
+-- CHECK age futur chef entreprise > 18
 CREATE OR REPLACE FUNCTION check_chef_entreprise_majeur()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -188,12 +190,14 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Création du trigger pour INSERT
+
 CREATE TRIGGER trigger_check_chef_entreprise_majeur_insert
 BEFORE INSERT OR UPDATE ON Chef_Entreprise
 FOR EACH ROW
 EXECUTE FUNCTION check_chef_entreprise_majeur();
 
+
+-- Met à jour la valeur de l'age d'une personne lors de l'insert (doit être couplet à une tache cron pour garder cette valeur à jour)
 CREATE OR REPLACE FUNCTION update_age()
 RETURNS TRIGGER AS $$
 DECLARE
@@ -228,6 +232,9 @@ BEFORE INSERT OR UPDATE ON Personne
 FOR EACH ROW
 EXECUTE FUNCTION update_age();
 
+
+
+-- Garanti qu'un id propiétaire ne peux pas être utilisé à la fois par une personne et une entreprise et en ajoute un si pas éxistant à l'origine
 CREATE OR REPLACE FUNCTION is_not_used_by_personne()
 RETURNS TRIGGER AS $$
 
@@ -245,15 +252,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Créer le déclencheur
 CREATE OR REPLACE TRIGGER trigger_is_not_used_by_personne
 BEFORE INSERT OR UPDATE ON Entreprise
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_personne();
 
+
+-- Garanti qu'un id propiétaire ne peux pas être utilisé à la fois par une entreprise et une personne et en ajoute un si pas éxistant à l'origine
 CREATE OR REPLACE FUNCTION is_not_used_by_entreprise()
 RETURNS TRIGGER AS $$
-
 BEGIN
     IF NOT EXISTS (SELECT id_proprietaire FROM Proprietaire WHERE id_proprietaire=NEW.id_personne) THEN
         INSERT INTO Proprietaire (id_proprietaire) VALUES (NEW.id_personne);
@@ -268,17 +275,15 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Créer le déclencheur
 CREATE OR REPLACE TRIGGER trigger_is_not_used_by_entreprise
 BEFORE INSERT OR UPDATE ON Personne
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_Entreprise();
 
+-- Garanti qu'un id propiétaire ne peux pas être utilisé à la fois par une entreprise_objet et une entreprise_vaisseau
 CREATE OR REPLACE FUNCTION is_not_used_by_entrepise_objet()
 RETURNS TRIGGER AS $$
-
 BEGIN
-
     IF EXISTS (SELECT id_entreprise FROM Entreprise_Objet WHERE id_entreprise=NEW.id_entreprise) THEN
         RAISE NOTICE 'already a Entreprise Objet';
     END IF;
@@ -287,12 +292,13 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Créer le déclencheur
 CREATE OR REPLACE TRIGGER trigger_is_not_used_by_entreprise_objet
 BEFORE INSERT OR UPDATE ON Entreprise_Vaisseau
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_entrepise_objet();
 
+
+-- Garanti qu'un id propiétaire ne peux pas être utilisé à la fois par une entreprise_objet et une entreprise_vaisseau
 CREATE OR REPLACE FUNCTION is_not_used_by_entreprise_vaisseau()
 RETURNS TRIGGER AS $$
 
@@ -306,14 +312,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Créer le déclencheur
 CREATE OR REPLACE TRIGGER trigger_is_not_used_by_entreprise_vaisseau
 BEFORE INSERT OR UPDATE ON Entreprise_Objet
 FOR EACH ROW
 EXECUTE FUNCTION is_not_used_by_entreprise_vaisseau();
 
--- FONCTION et méthode
 
+
+
+-- FONCTION et PROCEDURE 
+
+-- Met en forme les information d'un equipage en fonction du vaisseau associé
 CREATE OR REPLACE PROCEDURE afficher_informations_equipage(IN vaisseau_id INT)
 LANGUAGE plpgsql
 AS $$
@@ -360,6 +369,9 @@ BEGIN
     END IF;
 END;
 $$;
+
+
+-- Met en forme les information de tout les équipages associé à un vaisseau
 CREATE OR REPLACE PROCEDURE afficher_informations_equipage_de_tous_les_vaisseaux()
 LANGUAGE plpgsql
 AS $$
@@ -400,7 +412,7 @@ $$;
 
 
 
-
+-- Donne le nombre de model d'objet illégaux vendu par une entreprise
 CREATE OR REPLACE FUNCTION NombreObjetsIllegauxEntreprise (entreprise_id INT) 
 RETURNS INT
 LANGUAGE plpgsql
@@ -420,9 +432,7 @@ $$;
 
 
 
---Procédure pour transférer un vaisseau d'une entreprise à une autre avec mise à jour de l'historique :
-
-
+--Procédure pour transférer un vaisseau d'un propriétaire à un autre.
 CREATE OR REPLACE PROCEDURE TransfertVaisseau(IN vaisseau_idD INT,IN source_id INT,IN destination_id INT,IN date_transfer DATE)
 LANGUAGE plpgsql
 AS $$
@@ -432,7 +442,7 @@ BEGIN
    
     SELECT * INTO checkIfProprio FROM Historique_Proprio WHERE id_vaisseau=vaisseau_idD AND id_proprietaire=source_id AND date_fin IS NULL;
     IF checkIfProprio IS NULL THEN
-        RAISE EXCEPTION 'no such ships owned %',now();
+        RAISE EXCEPTION 'no such ships owned';
     ELSE 
         UPDATE Historique_Proprio SET date_fin = date_transfer WHERE id_vaisseau = vaisseau_idD AND date_fin IS NULL;
         INSERT 
@@ -444,7 +454,7 @@ END;
 $$;
 
 
-
+-- Retourne l'écart type de l'age des employé d'une entreprise.
 CREATE OR REPLACE FUNCTION ecart_type_age_entreprise(IN entreprise_id INT)
 RETURNS INT
 LANGUAGE plpgsql
@@ -474,6 +484,8 @@ BEGIN
 END;
 $$;
 
+
+-- Retourne la liste de tout les id libre pour identifié un propriétaire entre l'id min et l'id max
 CREATE OR REPLACE FUNCTION listFreeId() 
 RETURNS SETOF INTEGER
 LANGUAGE plpgsql

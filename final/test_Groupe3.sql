@@ -4,7 +4,6 @@ Bernardon Vincent [ 22009116 ]
 Hurel Jérémy [ 21907809 ]
 */
 
-
 --test trigger age chef entreprise
 
 INSERT INTO Proprietaire (id_proprietaire)
