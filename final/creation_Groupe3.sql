@@ -245,7 +245,7 @@ BEGIN
     END IF;
 
     IF EXISTS (SELECT id_personne FROM Personne WHERE id_personne=NEW.id_entreprise) THEN
-        RAISE NOTICE 'already a personne';
+        RAISE EXCEPTION 'deja une personne';
     END IF;
 
     RETURN NEW;
@@ -268,7 +268,7 @@ BEGIN
     END IF;
 
     IF EXISTS (SELECT id_entreprise FROM Entreprise WHERE id_entreprise=NEW.id_personne) THEN
-        RAISE NOTICE 'already a enterprise';
+        RAISE NOTICE 'deja une enterprise';
     END IF;
 
     RETURN NEW;
@@ -285,7 +285,7 @@ CREATE OR REPLACE FUNCTION is_not_used_by_entrepise_objet()
 RETURNS TRIGGER AS $$
 BEGIN
     IF EXISTS (SELECT id_entreprise FROM Entreprise_Objet WHERE id_entreprise=NEW.id_entreprise) THEN
-        RAISE NOTICE 'already a Entreprise Objet';
+        RAISE EXCEPTION 'deja une Entreprise Objet';
     END IF;
 
     RETURN NEW;
@@ -305,7 +305,7 @@ RETURNS TRIGGER AS $$
 BEGIN
 
     IF EXISTS (SELECT id_entreprise FROM Entreprise_Vaisseau WHERE id_entreprise=NEW.id_entreprise) THEN
-        RAISE NOTICE 'already a enterprise vaisseau';
+        RAISE EXCEPTION 'deja une entreprise vaisseau';
     END IF;
 
     RETURN NEW;
@@ -483,7 +483,7 @@ BEGIN
     END LOOP;
 
     IF count=0 THEN 
-        RAISE NOTICE 'pas d employé dans cette entreprise';
+        RAISE EXCEPTION 'pas d employé dans cette entreprise';
     
     ELSE
         RETURN SQRT(sum/count);

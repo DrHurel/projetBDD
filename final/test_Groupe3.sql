@@ -165,7 +165,7 @@ INSERT INTO Personne(id_personne,nom,prenom,age,date_naissance) VALUES  (104, 'S
 -- TEST FONCTION
 
 
-SELECT listFreeId();
+SELECT listFreeId(); -- appel basic la fonction n'est pas suposé produire d'erreur
 
 CALL afficher_informations_equipage(1);
 CALL afficher_informations_equipage(100);
