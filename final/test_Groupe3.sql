@@ -170,14 +170,14 @@ INSERT INTO Vaisseau (id_vaisseau, nom, prix, masse, longueur, largeur, id_fabri
 INSERT INTO Historique_Proprio (id_vaisseau, id_proprietaire, date_debut, date_fin) VALUES (42942, 75, '2023-01-01', NULL);
 
 select * 
-from Historique_Vente_Vaisseau
-where id_vaisseau = 42942 AND id_entreprise=75 AND id_proprietaire=76 AND date_vente='2023-12-19';
+from Historique_Proprio
+where id_vaisseau = 42942 AND id_proprietaire=75;
 
 call TransfertVaisseau(42942,75,76,'2023-12-19');
 
 select * 
-from Historique_Vente_Vaisseau
-where id_vaisseau = 42942 AND id_entreprise=75 AND id_proprietaire=76 AND date_vente='2023-12-19';
+from Historique_Proprio
+where id_vaisseau = 42942 AND id_proprietaire=76;
 
 
 --test procedure ecrat type
