@@ -454,6 +454,9 @@ BEGIN
             RETURN;
         END IF;
     END LOOP;
+    IF ok THEN 
+        RAISE EXCEPTION 'Pas de vaisseau correspondant transferable';
+    END IF;
 END;
 $$;
 
