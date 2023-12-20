@@ -162,8 +162,13 @@ FROM Personne
 WHERE id_personne=131;
 -- test trigger update_age insert avec age incorrect
 INSERT INTO Personne(id_personne,nom,prenom,age,date_naissance) VALUES  (104, 'Smith', 'Ethan',1120,'1993-05-20');
-
-
+SELECT id_personne, age
+FROM Personne
+WHERE id_personne=104;
+UPDATE Personne SET date_naissance='1990-01-01' WHERE id_personne=104;
+SELECT id_personne, age
+FROM Personne
+WHERE id_personne=104;
 -- TEST FONCTION
 
 
