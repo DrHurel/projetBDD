@@ -645,6 +645,19 @@ INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entrep
     (9, 'Smith', 'Michael', 'Chef', '1978-06-15', 19, 9),
     (10, 'Taylor', 'Olivia', 'Engineer', '1994-11-28', 20, 10);
 
+INSERT INTO Personne (id_personne, nom, prenom, poste, date_naissance, id_entreprise) VALUES
+    (41, 'Garcia', 'Maria', 'Administrator', '1985-02-08', 11),
+    (42, 'Chen', 'Wei', 'Developer', '1997-08-25', 11),
+    (43, 'Nguyen', 'Linh', 'Designer', '1980-04-12', 13),
+    (44, 'Ahmed', 'Ayesha', 'Analyst', '1992-11-05', 13),
+    (45, 'Kim', 'Sung', 'Engineer', '1987-06-20', 14),
+    (46, 'Fuentes', 'Javier', 'Technician', '1999-03-18', 14),
+    (47, 'Lee', 'Ji-hye', 'Pilot', '1983-09-10', 15),
+    (48, 'Muller', 'Hans', 'Scientist', '1975-12-15', 15),
+    (49, 'Sato', 'Yuki', 'Medic', '1996-07-28', 15),
+    (50, 'Gupta', 'Raj', 'Chef', '1984-01-10', 16);
+
+
 -- Insert into Vaisseau table
 
 
@@ -660,6 +673,18 @@ INSERT INTO Chef_Entreprise (date_debut, date_fin,id_personne,id_entreprise) VAL
 ('2023-08-25', '2023-10-25', 8, 18),
 ('2023-09-08', '2023-11-08', 9, 19),
 ('2023-10-12', '2023-12-12', 10, 20);
+
+INSERT INTO Chef_Entreprise (date_debut,id_personne,id_entreprise) VALUES
+('2023-03-01', 10, 11),
+('2023-04-15', 9, 12),
+('2023-05-10', 7, 13),
+('2023-06-20', 8, 14),
+('2023-07-05', 4, 15),
+('2023-08-30', 5, 16),
+('2023-09-18', 6, 17),
+('2023-10-25', 1, 18),
+('2023-11-08', 3, 19),
+('2023-12-12', 2, 20);
 
 
 -- Insert into Gamme_Vente_Objet table
@@ -719,6 +744,18 @@ INSERT INTO Historique_Proprio (id_vaisseau, id_proprietaire, date_debut, date_f
 (9, 9, '2023-09-08', '2023-10-08'),
 (10, 10, '2023-10-12', '2023-11-12');
 
+INSERT INTO Historique_Proprio (id_vaisseau, id_proprietaire, date_debut) VALUES
+(2, 1,  '2023-02-01'),
+(3, 2,  '2023-03-15'),
+(1, 3, '2023-04-10'),
+(5, 4,  '2023-05-20'),
+(6, 5,  '2023-06-05'),
+(4, 6,  '2023-07-30'),
+(10, 7,  '2023-08-18'),
+(8, 8, '2023-09-25'),
+(7, 9,  '2023-10-08'),
+(9, 10,  '2023-11-12');
+
 -- Insert into Historique_Vente_Vaisseau table
 INSERT INTO Historique_Vente_Vaisseau (id_vaisseau, id_entreprise, id_proprietaire, date_vente) VALUES
     (1, 11, 1, '2023-01-15'),
@@ -734,19 +771,9 @@ INSERT INTO Historique_Vente_Vaisseau (id_vaisseau, id_entreprise, id_proprietai
 
 
 -- REQUEST
-SELECT id_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Combien compte t-on d’employés pour chaque entreprise?
+SELECT id_entreprise,nom_entreprise,Count(*) as Nombre_Employes  FROM Personne GROUP BY id_entreprise; -- Combien compte t-on d’employés pour chaque entreprise?
 
 SELECT * FROM Vaisseau WHERE id_vaisseau NOT IN (SELECT id_vaisseau FROM Equipage GROUP BY id_vaisseau); -- Quels sont les vaisseaux n’ayant pas d'équipage ?
-
-
-SELECT e.id_equipage,e.nom AS nom_equipage,AVG(EXTRACT(YEAR FROM age(p.date_naissance))) AS moyenne_age -- quelle est la moyenne d'âge des membres de chaque équipage?
-FROM Equipage e
-JOIN Personne p ON e.id_equipage = p.id_equipage
-GROUP BY e.id_equipage, e.nom
-ORDER BY moyenne_age DESC;
-
-
-
 
 --Quels sont les vaisseaux ayant un prix supérieur à la moyenne des prix des autres vaisseaux?
 SELECT *
@@ -773,8 +800,6 @@ WHERE id_vaisseau NOT IN (
     )
 );
 
-
-
 --Quelles sont les entreprises dont le nombre de gammes d'objets proposés à la vente dépasse la moyenne du nombre de gammes d'objets proposés à la vente par les autres entreprises ?
 SELECT id_entreprise, nom_entreprise
 FROM Entreprise E1
@@ -791,9 +816,3 @@ WHERE (
     )
 );
 
--- la somme des prix des objets vendu part une entreprise objet
-SELECT COALESCE(SUM(mo.prix), 0) 
-    FROM Entreprise_Objet eo 
-    JOIN Gamme_Vente_Objet gvo on eo.id_entreprise = gvo.id_fabriquant
-    JOIN Modele_Objet mo ON gvo.id_objet = mo.id_objet
-    WHERE eo.id_entreprise = 22;
